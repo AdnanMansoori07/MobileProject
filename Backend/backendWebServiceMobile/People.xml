@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<People>
+  <Person id="1">
+    <name>John Smith</name>
+    <phone>0299882211</phone>
+    <department>1</department>
+    <adressStreet>1 Code Lane</adressStreet>
+    <addressCity>Javaville</addressCity>
+    <adressState>NSW</adressState>
+    <adressZIP>0100</adressZIP>
+    <adressCountry>Australia</adressCountry>
+  </Person>
+  <Person id="2">
+    <name>Sue White</name>
+    <phone>0388992255</phone>
+    <department>2</department>
+    <adressStreet>16 Bit Way</adressStreet>
+    <addressCity>Byte Cove</addressCity>
+    <adressState>QLD</adressState>
+    <adressZIP>1101</adressZIP>
+    <adressCountry>Australia</adressCountry>
+  </Person>
+  <Person id="3">
+    <name>Bob O'Bits</name>
+    <phone>0577882255</phone>
+    <department>3</department>
+    <adressStreet>8 Silicon Road</adressStreet>
+    <addressCity>Cloud Hills</addressCity>
+    <adressState>VIC</adressState>
+    <adressZIP>1001</adressZIP>
+    <adressCountry>Australia</adressCountry>
+  </Person>
+  <Person id="4">
+    <name>Mary Blue</name>
+    <phone>0644559988</phone>
+    <department>2</department>
+    <adressStreet>4 Processor Boulevard</adressStreet>
+    <addressCity>Appletson</addressCity>
+    <adressState>NT</adressState>
+    <adressZIP>1010</adressZIP>
+    <adressCountry>Australia</adressCountry>
+  </Person>
+  <Person id="5">
+    <name>Mick Green</name>
+    <phone>0299881122</phone>
+    <department>3</department>
+    <adressStreet>700 Bandwidth Street</adressStreet>
+    <addressCity>Bufferland</addressCity>
+    <adressState>NSW</adressState>
+    <adressZIP>0110</adressZIP>
+    <adressCountry>Australia</adressCountry>
+  </Person>
+  <Person id="6">
+    <name>Adnan Mansoori</name>
+    <phone>0426528976</phone>
+    <department>1</department>
+    <addressStreet>32 Farnell Road</addressStreet>
+    <addressCity>Sydney</addressCity>
+    <addressState>NSW</addressState>
+    <addressZIP>2199</addressZIP>
+    <addressCountry>Australia</addressCountry>
+  </Person>
+</People>
