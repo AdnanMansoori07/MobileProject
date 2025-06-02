@@ -10,6 +10,7 @@ import StaffProfile from '../screens/StaffProfile';
 import Intranet from '../screens/Intranet';
 import Settings from '../screens/Settings';
 import TabBarIconButton from '../components/TabBarIconButton';
+import UserProfile from '../screens/UserProfile';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -47,7 +48,7 @@ const TabNavigator = () => (
       component={StaffDirectory}
       options={{
         tabBarIcon: ({ focused }) => (
-          <TabBarIconButton focused={focused} icon="people-outline" label="Directory" />
+          <TabBarIconButton focused={focused} icon="search-outline" label="Directory" />
         ),
       }}
     />
@@ -78,6 +79,7 @@ const MainNavigator = () => {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Tabs" component={TabNavigator} />
         <Stack.Screen name="Staff Profile" component={StaffProfile} />
+        <Stack.Screen name="User Profile" component={UserProfile} />
       </Stack.Navigator>
     </NavigationContainer>
   );

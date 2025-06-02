@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 const colours = {
   darkgray: '#262626',
   red: '#941A1D',
@@ -11,26 +12,21 @@ const colours = {
 const StaffProfile = () => {
   const navigation = useNavigation();
   const route = useRoute();
-const { name = 'N/A', phone = 'N/A', email = 'N/A', department = 'N/A' } = route.params || {};
+  const { name = 'N/A', phone = 'N/A', email = 'N/A', department = 'N/A' } = route.params || {};
 
   return (
-    <View style={styles.container}>
-      {/* Header */}
+    <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Staff Profile</Text>
         <Image source={require('../assets/user-red.png')} style={styles.profilePicSmall} />
       </View>
-
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        {/* Large Profile Image */}
         <View style={styles.profileImageWrapper}>
           <Image source={require('../assets/user-red.png')} style={styles.profileImage} />
         </View>
 
-        {/* Name */}
         <Text style={styles.name}>{name}</Text>
 
-        {/* Buttons */}
         <View style={styles.buttonRow}>
           <TouchableOpacity style={styles.actionButton}>
             <Text style={styles.actionButtonText}>Call</Text>
@@ -57,7 +53,7 @@ const { name = 'N/A', phone = 'N/A', email = 'N/A', department = 'N/A' } = route
           <Text style={styles.backLink}>Back</Text>
         </TouchableOpacity>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

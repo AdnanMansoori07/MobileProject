@@ -4,7 +4,7 @@ import { TextInput } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const colours = {
     darkgray: '#262626'
@@ -46,7 +46,7 @@ const StaffDirectory = () => {
 
     const navigation = useNavigation();
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.headerText}>
                     Staff Directory
@@ -100,7 +100,7 @@ const StaffDirectory = () => {
                     </TouchableOpacity>
                 )}
             />
-        </View>
+        </SafeAreaView>
     )
 }
 

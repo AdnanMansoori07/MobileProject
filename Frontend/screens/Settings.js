@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const colours = {
     darkgray: '#262626'
@@ -7,7 +8,7 @@ const colours = {
 
 const Settings = () => {
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.headerText}>
                     Settings
@@ -17,7 +18,7 @@ const Settings = () => {
                     style={styles.profilePic}
                 />
             </View>
-        </View>
+        </SafeAreaView>
     )
 }
 
