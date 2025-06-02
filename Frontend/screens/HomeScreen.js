@@ -1,134 +1,121 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  SafeAreaView,
-  Platform,
-} from 'react-native';
-import BottomNav from '../components/BottomNav';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
-const HomeScreen = ({ navigation }) => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
-        {/* Header */}
-        <View style={styles.header}>
-          <Text style={styles.greeting}>Good morning, Sabrina</Text>
-          <Image
-            source={{ uri: 'https://i.pravatar.cc/100' }}
-            style={styles.avatar}
-          />
+const colours = {
+    darkgray: '#262626'
+}
+
+const userName = 'User';
+
+const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Good morning'
+    if (hour < 17) return 'Good afternoon'
+    if (hour < 24) return 'Good evening'
+}
+
+const HomeScreen = () => {
+
+    const navigation = useNavigation();
+    return (
+        <View style={styles.container}>
+            <View style={styles.header}>
+                <Text style={styles.greeting}>{getGreeting()}, {userName}</Text>
+                <Image
+                    source={require('../assets/user-red.png')}
+                    style={styles.profilePic}
+                />
+            </View>
+
+            <View style={styles.buttonGrid}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Staff Directory')}>
+                    <Ionicons name='people-outline' size={28} color={colours.darkgray} />
+                    <Text style={styles.buttonText}>Staff Directory</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Intranet')}>
+                    <Ionicons name='globe-outline' size={28} color={colours.darkgray} />
+                    <Text style={styles.buttonText}>Intranet</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Profile')}>
+                    <Ionicons name='person-outline' size={28} color={colours.darkgray} />
+                    <Text style={styles.buttonText}>Profile</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={[styles.logoutButton]}>
+                    <Ionicons name='log-out-outline' size={28} color={'#FFFFFF'} />
+                    <Text style={styles.logoutText}>Log Out</Text>
+                </TouchableOpacity>
+            </View>
         </View>
-
-        {/* 2x2 Button Grid */}
-        <View style={styles.buttonGrid}>
-          <View style={styles.row}>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('StaffDirectory')}
-            >
-              <Text style={styles.icon}>🏢</Text>
-              <Text style={styles.buttonText}>Staff Directory</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('Intranet')}
-            >
-              <Text style={styles.icon}>🌐</Text>
-              <Text style={styles.buttonText}>Intranet</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.row}>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('Profile')}
-            >
-              <Text style={styles.icon}>👤</Text>
-              <Text style={styles.buttonText}>Profile</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={[styles.button, styles.logoutButton]}>
-              <Text style={styles.icon}>⏴</Text>
-              <Text style={[styles.buttonText, styles.logoutText]}>Log Out</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-
-      <BottomNav />
-    </SafeAreaView>
-  );
+    );
 };
 
-const ROI_COLORS = {
-  red: '#941a1d',
-  charcoal: '#262626',
-  lightGrey: '#D9D9D9',
-  white: '#FFFFFF',
-};
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: ROI_COLORS.white,
-    paddingTop: Platform.OS === 'android' ? 30 : 0,
-  },
-  content: {
-    flex: 1,
-  },
-  header: {
-    backgroundColor: ROI_COLORS.charcoal,
-    padding: 15,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  greeting: {
-    color: ROI_COLORS.white,
-    fontSize: 20,
-    fontFamily: 'Trebuchet MS',
-  },
-  avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-  },
-  buttonGrid: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  row: {
-    flexDirection: 'row',
-  },
-  button: {
-    backgroundColor: ROI_COLORS.lightGrey,
-    margin: 10,
-    width: 140,
-    height: 140,
-    borderRadius: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  logoutButton: {
-    backgroundColor: ROI_COLORS.red,
-  },
-  logoutText: {
-    color: ROI_COLORS.white,
-  },
-  buttonText: {
-    marginTop: 5,
-    fontFamily: 'Trebuchet MS',
-    textAlign: 'center',
-  },
-  icon: {
-    fontSize: 24,
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#FFFFFF',
+        padding: 20,
+    },
+    header: {
+        backgroundColor: colours.darkgray,
+        padding: 20,
+        borderRadius: 10,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    greeting: {
+        color: '#FFFFFF',
+        fontSize: 16,
+        fontWeight: 'bold'
+    },
+    profilePic: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+    },
+    buttonGrid: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        rowGap: 10,
+        columnGap: 10,
+        marginTop: 20
+    },
+
+    button: {
+        flexBasis: '48%',
+        aspectRatio: 1,
+        backgroundColor: '#D9D9D9',
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 10,
+    },
+    buttonText: {
+        color: colours.darkgray,
+        fontWeight: 'bold',
+        textAlign: 'center'
+    },
+    logoutButton: {
+        backgroundColor: '#941A1D',
+        flexBasis: '48%',
+        aspectRatio: 1,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 10,
+    },
+    logoutText: {
+        color: '#FFFFFF',
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
 });
 
 export default HomeScreen;

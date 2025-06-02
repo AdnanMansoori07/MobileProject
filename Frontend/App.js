@@ -1,6 +1,10 @@
 import React from 'react';
-import AppNavigator from './navigation/AppNavigator';
+import { StatusBar } from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 
-export default function App() {
-  return <AppNavigator />;
+import HomeScreen from './screens/HomeScreen';
+import MainNavigator from './navigation/MainNavigator';
+
+export default function App(){
+  return <MainNavigator />
 }
