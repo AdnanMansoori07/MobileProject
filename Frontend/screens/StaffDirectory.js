@@ -64,7 +64,7 @@ const StaffDirectory = () => {
                     style={styles.searchInput} />
             </View>
 
-            <TouchableOpacity style={styles.card}>
+            <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('Add Profile')}>
                 <View style={styles.cardLeft}>
                     <View style={{ justifyContent: 'center' }}>
                         <Image source={require('../assets/user-red.png')} style={styles.profileIcon} />
@@ -121,6 +121,7 @@ const styles = StyleSheet.create({
     headerText: {
         color: '#FFFFFF',
         fontSize: 16,
+        fontFamily: 'Trebuchet MS',
         fontWeight: 'bold'
     },
     profilePic: {
@@ -140,6 +141,7 @@ const styles = StyleSheet.create({
     searchInput: {
         flex: 1,
         fontSize: 16,
+        fontFamily: 'Trebuchet MS',
         color: '#000'
     },
     card: {
@@ -162,6 +164,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         color: '#262626',
+        fontFamily: 'Trebuchet MS',
         marginTop: 2
     },
     profileIcon: {

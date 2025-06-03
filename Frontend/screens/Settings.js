@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     headerText: {
         color: '#FFFFFF',
         fontSize: 16,
+        fontFamily: 'Trebuchet MS',
         fontWeight: 'bold'
     },
     profilePic: {

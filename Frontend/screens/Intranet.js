@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: 'bold',
+    fontFamily: 'Trebuchet MS',
   },
   profilePic: {
     width: 40,
@@ -102,6 +103,7 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     fontSize: 16,
+    fontFamily: 'Trebuchet MS',
     color: '#000',
   },
   buttonGrid: {
@@ -125,6 +127,7 @@ const styles = StyleSheet.create({
     color: colours.darkgray,
     fontWeight: 'bold',
     textAlign: 'center',
+    fontFamily: 'Trebuchet MS',
     marginTop: 8,
   },
 });

@@ -1,31 +1,33 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 const colours = {
     darkgray: "#262626"
 }
 
-const UserProfile = () => {
-
+const EditStaff = () => {
+    // TO BE CHANGED
     const navigation = useNavigation();
-
-    const [name, setName] = React.useState('Sabrina Carpenter');
-    const [phone, setPhone] = React.useState('02 2000 2000');
-    const [email, setEmail] = React.useState('sabrina.carpenter@roi.com.au');
+    const route = useRoute();
+    const { name = 'N/A', phone = 'N/A', email = 'N/A', department = 'N/A' } = route.params || {};
     const [address, setAddress] = React.useState('123 LA Street');
     const [postcode, setPostcode] = React.useState('0000');
     const [city, setCity] = React.useState('Sydney');
     const [country, setCountry] = React.useState('Australia');
-    const [department, setDepartment] = React.useState('Marketing');
+    const [nameState, setName] = React.useState(name);
+    const [phoneState, setPhone] = React.useState(phone);
+    const [emailState, setEmail] = React.useState(email);
+    const [departmentState, setDepartment] = React.useState(department);
+    // TO BE CHANGED
 
 
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.headerText}>
-                    My Profile
+                    Edit Profile
                 </Text>
                 <Image
                     source={require('../assets/user-red.png')}
@@ -39,7 +41,7 @@ const UserProfile = () => {
 
             <View style={styles.inputBox}>
                 <TextInput
-                    value={name}
+                    value={nameState}
                     onChangeText={setName}
                     placeholder={name}
                     placeholderTextColor='#888'
@@ -48,7 +50,7 @@ const UserProfile = () => {
             </View>
             <View style={styles.inputBox}>
                 <TextInput
-                    value={phone}
+                    value={phoneState}
                     onChangeText={setPhone}
                     placeholder={phone}
                     placeholderTextColor='#888'
@@ -57,7 +59,7 @@ const UserProfile = () => {
             </View>
             <View style={styles.inputBox}>
                 <TextInput
-                    value={email}
+                    value={emailState}
                     onChangeText={setEmail}
                     placeholder={email}
                     placeholderTextColor='#888'
@@ -103,7 +105,7 @@ const UserProfile = () => {
 
             <View style={styles.inputBox}>
                 <TextInput
-                    value={department}
+                    value={departmentState}
                     onChangeText={setDepartment}
                     placeholder={department}
                     placeholderTextColor='#888'
@@ -137,8 +139,8 @@ const styles = StyleSheet.create({
     headerText: {
         color: '#FFFFFF',
         fontSize: 16,
+        fontWeight: 'bold',
         fontFamily: 'Trebuchet MS',
-        fontWeight: 'bold'
     },
     profilePic: {
         width: 40,
@@ -150,6 +152,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         paddingHorizontal: 16,
         paddingVertical: 12,
+        fontFamily: 'Trebuchet MS',
         marginBottom: 10,
     },
     input: {
@@ -180,10 +183,10 @@ const styles = StyleSheet.create({
     },
     saveButtonText: {
         color: '#FFFFFF',
-        fontFamily: 'Trebuchet MS',
         fontWeight: 'bold',
+        fontFamily: 'Trebuchet MS',
         fontSize: 16,
     },
 });
 
-export default UserProfile;
+export default EditStaff;

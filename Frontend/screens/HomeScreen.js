@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 16,
         fontWeight: 'bold',
+        fontFamily: 'Trebuchet MS',
     },
     profilePic: {
         width: 40,
@@ -115,6 +116,7 @@ const styles = StyleSheet.create({
     buttonText: {
         color: colours.darkgray,
         fontWeight: 'bold',
+        fontFamily: 'Trebuchet MS',
         textAlign: 'center',
         marginTop: 8,
     },
@@ -130,6 +132,7 @@ const styles = StyleSheet.create({
     logoutText: {
         color: '#FFFFFF',
         fontWeight: 'bold',
+        fontFamily: 'Trebuchet MS',
         textAlign: 'center',
         marginTop: 8,
     },

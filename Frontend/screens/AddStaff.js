@@ -7,25 +7,25 @@ const colours = {
     darkgray: "#262626"
 }
 
-const UserProfile = () => {
+const AddStaff = () => {
 
     const navigation = useNavigation();
 
-    const [name, setName] = React.useState('Sabrina Carpenter');
-    const [phone, setPhone] = React.useState('02 2000 2000');
-    const [email, setEmail] = React.useState('sabrina.carpenter@roi.com.au');
-    const [address, setAddress] = React.useState('123 LA Street');
-    const [postcode, setPostcode] = React.useState('0000');
-    const [city, setCity] = React.useState('Sydney');
-    const [country, setCountry] = React.useState('Australia');
-    const [department, setDepartment] = React.useState('Marketing');
+    const [name, setName] = React.useState('');
+    const [phone, setPhone] = React.useState('');
+    const [email, setEmail] = React.useState('');
+    const [address, setAddress] = React.useState('');
+    const [postcode, setPostcode] = React.useState('');
+    const [city, setCity] = React.useState('');
+    const [country, setCountry] = React.useState('');
+    const [department, setDepartment] = React.useState('');
 
 
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.headerText}>
-                    My Profile
+                    Add Staff
                 </Text>
                 <Image
                     source={require('../assets/user-red.png')}
@@ -41,7 +41,7 @@ const UserProfile = () => {
                 <TextInput
                     value={name}
                     onChangeText={setName}
-                    placeholder={name}
+                    placeholder='Name'
                     placeholderTextColor='#888'
                     style={styles.input}
                 />
@@ -50,7 +50,7 @@ const UserProfile = () => {
                 <TextInput
                     value={phone}
                     onChangeText={setPhone}
-                    placeholder={phone}
+                    placeholder='Phone Number'
                     placeholderTextColor='#888'
                     style={styles.input}
                 />
@@ -59,7 +59,7 @@ const UserProfile = () => {
                 <TextInput
                     value={email}
                     onChangeText={setEmail}
-                    placeholder={email}
+                    placeholder='Email'
                     placeholderTextColor='#888'
                     style={styles.input}
                 />
@@ -68,7 +68,7 @@ const UserProfile = () => {
                 <TextInput
                     value={address}
                     onChangeText={setAddress}
-                    placeholder={address}
+                    placeholder='Address'
                     placeholderTextColor='#888'
                     style={styles.input}
                 />
@@ -77,7 +77,7 @@ const UserProfile = () => {
                 <TextInput
                     value={postcode}
                     onChangeText={setPostcode}
-                    placeholder={postcode}
+                    placeholder='Postcode'
                     placeholderTextColor='#888'
                     style={styles.input}
                 />
@@ -86,7 +86,7 @@ const UserProfile = () => {
                 <TextInput
                     value={city}
                     onChangeText={setCity}
-                    placeholder={city}
+                    placeholder='City'
                     placeholderTextColor='#888'
                     style={styles.input}
                 />
@@ -95,7 +95,7 @@ const UserProfile = () => {
                 <TextInput
                     value={country}
                     onChangeText={setCountry}
-                    placeholder={country}
+                    placeholder='Country'
                     placeholderTextColor='#888'
                     style={styles.input}
                 />
@@ -105,7 +105,7 @@ const UserProfile = () => {
                 <TextInput
                     value={department}
                     onChangeText={setDepartment}
-                    placeholder={department}
+                    placeholder='Department'
                     placeholderTextColor='#888'
                     style={styles.input}
                 />
@@ -180,10 +180,10 @@ const styles = StyleSheet.create({
     },
     saveButtonText: {
         color: '#FFFFFF',
-        fontFamily: 'Trebuchet MS',
         fontWeight: 'bold',
+        fontFamily: 'Trebuchet MS',
         fontSize: 16,
     },
 });
 
-export default UserProfile;
+export default AddStaff;

@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'rea
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import EditStaff from './EditStaff';
+import { beginEvent } from 'react-native/Libraries/Performance/Systrace';
 const colours = {
   darkgray: '#262626',
   red: '#941A1D',
@@ -49,9 +51,19 @@ const StaffProfile = () => {
           <Text style={styles.infoText}>{department}</Text>
         </View>
 
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={styles.backLink}>Back</Text>
-        </TouchableOpacity>
+        <View style={styles.bottomButtons}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Text style={styles.backLink}>Back</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Edit Profile', {
+            name: name,
+            phone: phone,
+            email: email,
+            department: department
+          })}>
+            <Text style={styles.backLink}>Edit</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -64,6 +76,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     padding: 20,
+  },
+  bottomButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly', 
+    width: '100%',
+    marginTop: 10
   },
   scrollContent: {
     alignItems: 'center',
@@ -80,6 +98,7 @@ const styles = StyleSheet.create({
   headerText: {
     color: '#FFFFFF',
     fontSize: 16,
+    fontFamily: 'Trebuchet MS',
     fontWeight: 'bold',
   },
   profilePicSmall: {
@@ -103,6 +122,7 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 18,
     fontWeight: 'bold',
+    fontFamily: 'Trebuchet MS',
     marginBottom: 20,
   },
   buttonRow: {
@@ -118,6 +138,7 @@ const styles = StyleSheet.create({
   },
   actionButtonText: {
     color: '#FFFFFF',
+    fontFamily: 'Trebuchet MS',
     fontWeight: 'bold',
   },
   infoRow: {
@@ -136,10 +157,12 @@ const styles = StyleSheet.create({
   infoText: {
     fontSize: 16,
     color: '#000',
+    fontFamily: 'Trebuchet MS',
     fontWeight: '500',
   },
   backLink: {
     color: colours.red,
+    fontFamily: 'Trebuchet MS',
     fontWeight: 'bold',
     marginTop: 10,
     alignSelf: 'flex-start',
