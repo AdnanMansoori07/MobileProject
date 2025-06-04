@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'reac
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 const colours = {
     darkgray: "#262626",
@@ -10,18 +11,21 @@ const colours = {
 };
 
 const leaveTypes = [
-    'Annual Leave',
-    'Sick Leave',
-    'Carer’s Leave',
-    'Compassionate Leave',
-    'Unpaid Leave'
+    { label: 'Annual Leave', value: 'Annual Leave' },
+    { label: 'Sick Leave', value: 'Sick Leave' },
+    { label: 'Carer’s Leave', value: 'Carer’s Leave' },
+    { label: 'Compassionate Leave', value: 'Compassionate Leave' },
+    { label: 'Unpaid Leave', value: 'Unpaid Leave' },
 ];
 
 const Requests = () => {
     const navigation = useNavigation();
 
-    // Non-functional state just to demo the dropdown
-    const [leaveType, setLeaveType] = React.useState(leaveTypes[0]);
+    // DropDownPicker state
+    const [open, setOpen] = React.useState(false);
+    const [leaveType, setLeaveType] = React.useState(leaveTypes[0].value);
+    const [items, setItems] = React.useState(leaveTypes);
+
     const [startDate, setStartDate] = React.useState('');
     const [endDate, setEndDate] = React.useState('');
     const [reason, setReason] = React.useState('');
@@ -40,14 +44,22 @@ const Requests = () => {
                 <Ionicons name="calendar-outline" size={64} color="#262626" />
             </View>
 
-            <View style={styles.inputBox}>
-                <TouchableOpacity style={styles.dropdownFake}>
-                    <Text style={styles.dropdownFakeText}>
-                        {leaveType}
-                    </Text>
-                    <Ionicons name="chevron-down-outline" size={18} color="#888" style={{ marginLeft: 8 }} />
-                </TouchableOpacity>
+            {/* DropDownPicker here */}
+            <View style={{ marginBottom: 10, zIndex: 10 }}>
+                <DropDownPicker
+                    open={open}
+                    value={leaveType}
+                    items={items}
+                    setOpen={setOpen}
+                    setValue={setLeaveType}
+                    setItems={setItems}
+                    style={styles.dropdown}
+                    textStyle={styles.dropdownText}
+                    dropDownContainerStyle={{ borderRadius: 8 }}
+                    placeholder="Select Leave Type"
+                />
             </View>
+
             <View style={styles.inputBox}>
                 <TextInput
                     value={startDate}
@@ -119,12 +131,6 @@ const styles = StyleSheet.create({
         marginBottom: 16,
         marginTop: 16
     },
-    profileImage: {
-        width: 80,
-        height: 80,
-        borderRadius: 40,
-        resizeMode: 'cover'
-    },
     inputBox: {
         backgroundColor: '#D9D9D9',
         borderRadius: 8,
@@ -137,16 +143,16 @@ const styles = StyleSheet.create({
         fontFamily: 'Trebuchet MS',
         color: '#000'
     },
-    dropdownFake: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        width: '100%',
+    dropdown: {
+        backgroundColor: '#D9D9D9',
+        borderRadius: 8,
+        borderWidth: 0,
+        minHeight: 44,
     },
-    dropdownFakeText: {
+    dropdownText: {
+        fontFamily: 'Trebuchet MS',
         fontSize: 16,
         color: '#000',
-        fontFamily: 'Trebuchet MS'
     },
     submitButton: {
         marginTop: 20,
