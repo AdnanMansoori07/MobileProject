@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
 
 const colours = {
   darkgray: '#262626',
@@ -19,6 +20,8 @@ const colours = {
 const screenWidth = Dimensions.get('window').width;
 
 const Intranet = () => {
+
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
       {/* Header */}
@@ -42,22 +45,22 @@ const Intranet = () => {
 
       {/* Button Grid */}
       <View style={styles.buttonGrid}>
-        <TouchableOpacity style={styles.button}>
-          <Ionicons name="folder-outline" size={28} color={colours.darkgray} />
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Files')}>
+          <Ionicons name="folder-outline" size={28} color={colours.darkgray}/>
           <Text style={styles.buttonText}>Files</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Reports')}>
           <Ionicons name="clipboard-outline" size={28} color={colours.darkgray} />
           <Text style={styles.buttonText}>Reports</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Training')}>
           <Ionicons name="library-outline" size={28} color={colours.darkgray} />
           <Text style={styles.buttonText}>Training</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Requests')}>
           <Ionicons name="calendar-outline" size={28} color={colours.darkgray} />
           <Text style={styles.buttonText}>Requests</Text>
         </TouchableOpacity>

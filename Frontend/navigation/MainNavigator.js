@@ -13,6 +13,10 @@ import TabBarIconButton from '../components/TabBarIconButton';
 import UserProfile from '../screens/UserProfile';
 import EditStaff from '../screens/EditStaff';
 import AddStaff from '../screens/AddStaff';
+import Files from '../screens/Files';
+import Reports from '../screens/Reports';
+import Training from '../screens/Training';
+import Requests from '../screens/Requests';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -84,6 +88,10 @@ const MainNavigator = () => {
         <Stack.Screen name="User Profile" component={UserProfile} />
         <Stack.Screen name="Edit Profile" component={EditStaff} />
         <Stack.Screen name="Add Profile" component={AddStaff} />
+        <Stack.Screen name="Files" component={Files} />
+        <Stack.Screen name="Reports" component={Reports} />
+        <Stack.Screen name="Training" component={Training} />
+        <Stack.Screen  name='Requests' component={Requests} />
       </Stack.Navigator>
     </NavigationContainer>
   );
