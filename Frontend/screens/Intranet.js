@@ -17,23 +17,19 @@ const colours = {
   lightgray: '#D9D9D9',
 };
 
-const screenWidth = Dimensions.get('window').width;
-
 const Intranet = () => {
-
   const navigation = useNavigation();
+
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <Text style={styles.headerText}>Intranet</Text>
         <Image
-          source={require('../assets/user-red.png')}
+          source={require('../assets/user-profile-pic.png')}
           style={styles.profilePic}
         />
       </View>
 
-      {/* Search Bar */}
       <View style={styles.searchBar}>
         <Ionicons name="search-outline" size={20} color="#888" style={{ marginRight: 8 }} />
         <TextInput
@@ -43,27 +39,27 @@ const Intranet = () => {
         />
       </View>
 
-      {/* Button Grid */}
       <View style={styles.buttonGrid}>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Files')}>
-          <Ionicons name="folder-outline" size={28} color={colours.darkgray}/>
-          <Text style={styles.buttonText}>Files</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Reports')}>
-          <Ionicons name="clipboard-outline" size={28} color={colours.darkgray} />
-          <Text style={styles.buttonText}>Reports</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Training')}>
-          <Ionicons name="library-outline" size={28} color={colours.darkgray} />
-          <Text style={styles.buttonText}>Training</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Requests')}>
-          <Ionicons name="calendar-outline" size={28} color={colours.darkgray} />
-          <Text style={styles.buttonText}>Requests</Text>
-        </TouchableOpacity>
+        <View style={styles.buttonRow}>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Files')}>
+            <Ionicons name="folder-outline" size={28} color={colours.darkgray}/>
+            <Text style={styles.buttonText}>Files</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Reports')}>
+            <Ionicons name="clipboard-outline" size={28} color={colours.darkgray} />
+            <Text style={styles.buttonText}>Reports</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.buttonRow}>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Training')}>
+            <Ionicons name="library-outline" size={28} color={colours.darkgray} />
+            <Text style={styles.buttonText}>Training</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Requests')}>
+            <Ionicons name="calendar-outline" size={28} color={colours.darkgray} />
+            <Text style={styles.buttonText}>Requests</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -110,21 +106,21 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   buttonGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    rowGap: 12,
-    columnGap: 12,
     marginTop: 20,
   },
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 16,
+  },
   button: {
-    width: (screenWidth - 60) / 2,
+    flex: 1,
     aspectRatio: 1,
     backgroundColor: colours.lightgray,
     borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 10,
+    marginHorizontal: 6,
   },
   buttonText: {
     color: colours.darkgray,

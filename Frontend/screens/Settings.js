@@ -14,7 +14,7 @@ const Settings = () => {
                     Settings
                 </Text>
                 <Image
-                    source={require('../assets/user-red.png')}
+                    source={require('../assets/user-profile-pic.png')}
                     style={styles.profilePic}
                 />
             </View>

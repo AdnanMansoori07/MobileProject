@@ -1,74 +1,64 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { TextInput } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { FlatList } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const colours = {
     darkgray: '#262626'
 }
 
-const dummyStaffList = [
-  {
-    id: '1',
-    name: 'Taylor Swift',
-    phone: '02 2000 0022',
-    email: 'taylorswift@roi.com.au',
-    department: 'Information Technology'
-  },
-  {
-    id: '2',
-    name: 'Dua Lipa',
-    phone: '02 3000 0033',
-    email: 'dualipa@roi.com.au',
-    department: 'Marketing'
-  },
-  {
-    id: '3',
-    name: 'Will Ramos',
-    phone: '02 4000 0044',
-    email: 'willramos@roi.com.au',
-    department: 'Finance'
-  },
-  {
-    id: '4',
-    name: 'Alan Walker',
-    phone: '02 5000 0055',
-    email: 'alanwalker@roi.com.au',
-    department: 'Security'
-  }
-];
-
+const API_URL = 'http://10.0.0.132:44374/WebService1.asmx/GetPeople';
 
 const StaffDirectory = () => {
-
+    const [staffList, setStaffList] = useState([]);
     const navigation = useNavigation();
+
+    useFocusEffect(
+        useCallback(() => {
+            fetch(API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" }
+            })
+                .then(response => response.text())
+                .then(text => {
+                    const endIdx = text.indexOf(']') + 1;
+                    if (endIdx > 0) {
+                        const jsonStr = text.substring(0, endIdx);
+                        const data = JSON.parse(jsonStr);
+                        setStaffList(data);
+                    } else {
+                        console.log("Failed to extract JSON array:", text);
+                    }
+                })
+                .catch(err => {
+                    console.log("Fetch error:", err);
+                });
+        }, [])
+    );
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.headerText}>
-                    Staff Directory
-                </Text>
+                <Text style={styles.headerText}>Staff Directory</Text>
                 <Image
-                    source={require('../assets/user-red.png')}
+                    source={require('../assets/user-profile-pic.png')}
                     style={styles.profilePic}
                 />
             </View>
 
             <View style={styles.searchBar}>
                 <Ionicons name="search-outline" size={20} color='#888' style={{ marginRight: 8 }} />
-                <TextInput placeholder="Search.."
+                <TextInput
+                    placeholder="Search.."
                     placeholderTextColor="#888"
-                    style={styles.searchInput} />
+                    style={styles.searchInput}
+                />
             </View>
 
             <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('Add Profile')}>
                 <View style={styles.cardLeft}>
-                    <View style={{ justifyContent: 'center' }}>
-                        <Image source={require('../assets/user-red.png')} style={styles.profileIcon} />
-                    </View>
+                    <Image source={require('../assets/user-red.png')} style={styles.profileIcon} />
                     <View style={{ justifyContent: 'center', marginLeft: 10 }}>
                         <Text style={styles.cardText}>Add Staff</Text>
                     </View>
@@ -79,17 +69,22 @@ const StaffDirectory = () => {
             <View style={styles.divider} />
 
             <FlatList
-                data={dummyStaffList}
-                keyExtractor={(item) => item.id}
-                contentContainerStyle={{ paddingBottom: 20 }}
+                data={staffList}
+                keyExtractor={(item) => item.id.toString()}
+                contentContainerStyle={{ paddingBottom: 90 }}
                 renderItem={({ item }) => (
                     <TouchableOpacity
                         style={styles.card}
                         onPress={() => navigation.navigate('Staff Profile', {
+                            id: item.id,
                             name: item.name,
                             phone: item.phone,
-                            email: item.email,
-                            department: item.department
+                            department: item.department?.name,
+                            addressStreet: item.addressStreet || '',
+                            addressCity: item.addressCity || '',
+                            addressState: item.addressState || '',
+                            addressZIP: item.addressZIP || '',
+                            addressCountry: item.addressCountry || ''
                         })}
                     >
                         <View style={styles.cardLeft}>
@@ -101,7 +96,7 @@ const StaffDirectory = () => {
                 )}
             />
         </SafeAreaView>
-    )
+    );
 }
 
 const styles = StyleSheet.create({

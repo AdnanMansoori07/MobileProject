@@ -3,24 +3,65 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'rea
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import EditStaff from './EditStaff';
-import { beginEvent } from 'react-native/Libraries/Performance/Systrace';
+
 const colours = {
   darkgray: '#262626',
   red: '#941A1D',
   lightgray: '#D9D9D9'
 };
 
+function generateEmail(name) {
+  if (!name) return 'N/A';
+  let cleaned = name.replace(/[^a-zA-Z\s]/g, '');
+  let parts = cleaned.trim().split(/\s+/);
+  if (parts.length < 2) return 'N/A';
+  let first = parts[0].toLowerCase();
+  let last = parts[parts.length - 1].toLowerCase();
+  return `${first}${last}@roi.com.au`;
+}
+
 const StaffProfile = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  const { name = 'N/A', phone = 'N/A', email = 'N/A', department = 'N/A' } = route.params || {};
+  const {
+    id,
+    name = 'N/A',
+    phone = 'N/A',
+    email = 'N/A',
+    department = 'N/A',
+    addressStreet = '',
+    addressCity = '',
+    addressState = '',
+    addressZIP = '',
+    addressCountry = ''
+  } = route.params || {};
+
+  const handleDelete = () => {
+    if (!id) {
+      alert("No staff ID found.");
+      return;
+    }
+    fetch('http://10.0.0.132:44374/WebService1.asmx/RemovePerson', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: `id=${id}`
+    })
+      .then(res => res.text())
+      .then(() => {
+        navigation.goBack();
+      })
+      .catch(err => {
+        alert('Failed to delete staff: ' + err);
+      });
+  };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Staff Profile</Text>
-        <Image source={require('../assets/user-red.png')} style={styles.profilePicSmall} />
+        <Image source={require('../assets/user-profile-pic.png')} style={styles.profilePicSmall} />
       </View>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.profileImageWrapper}>
@@ -44,7 +85,7 @@ const StaffProfile = () => {
         </View>
         <View style={styles.infoRow}>
           <Ionicons name="mail-outline" size={20} color="#000" style={styles.infoIcon} />
-          <Text style={styles.infoText}>{email}</Text>
+          <Text style={styles.infoText}>{generateEmail(name)}</Text>
         </View>
         <View style={styles.infoRow}>
           <Ionicons name="business-outline" size={20} color="#000" style={styles.infoIcon} />
@@ -56,12 +97,20 @@ const StaffProfile = () => {
             <Text style={styles.backLink}>Back</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('Edit Profile', {
-            name: name,
-            phone: phone,
-            email: email,
-            department: department
+            id,
+            name,
+            phone,
+            department,
+            addressStreet,
+            addressCity,
+            addressState,
+            addressZIP,
+            addressCountry
           })}>
             <Text style={styles.backLink}>Edit</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleDelete}>
+            <Text style={[styles.backLink]}>Delete</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -79,7 +128,7 @@ const styles = StyleSheet.create({
   },
   bottomButtons: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly', 
+    justifyContent: 'space-evenly',
     width: '100%',
     marginTop: 10
   },

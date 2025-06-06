@@ -17,12 +17,12 @@ const dummyStaffList = [
     { name: 'Customer Service Skills' },
     { name: 'Data Privacy and Security' },
     { name: 'Manual Handling Training' },
-    { name: 'Bullying and Harassment Awareness' },
+    { name: 'Harassment Awareness' },
     { name: 'Cybersecurity Essentials' },
     { name: 'Emergency Evacuation Drill' },
     { name: 'Infection Control Training' },
     { name: 'Conflict Resolution Skills' },
-    { name: 'Diversity and Inclusion Workshop' },
+    { name: 'Diversity & Inclusion Workshop' },
     { name: 'Time Management Tips' },
     { name: 'Ethics and Code of Conduct' },
     { name: 'Leadership Development Program' },
@@ -40,7 +40,7 @@ const Training = () => {
             <View style={styles.header}>
                 <Text style={styles.headerText}>Training</Text>
                 <Image
-                    source={require('../assets/user-red.png')}
+                    source={require('../assets/user-profile-pic.png')}
                     style={styles.profilePic}
                 />
             </View>
@@ -55,7 +55,7 @@ const Training = () => {
             <FlatList
                 data={dummyStaffList}
                 keyExtractor={(item, index) => index.toString()}
-                contentContainerStyle={{ paddingBottom: 20 }}
+                contentContainerStyle={{ paddingBottom: 90 }}
                 renderItem={({ item }) => (
                     <TouchableOpacity style={styles.card}>
                         <View style={styles.cardLeft}>

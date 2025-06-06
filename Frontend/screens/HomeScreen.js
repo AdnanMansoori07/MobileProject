@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from 'rea
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import UserProfile from '../screens/UserProfile'
 
 const colours = {
     darkgray: '#262626',
@@ -29,7 +28,7 @@ const getGreetingIcon = () => {
 
 const HomeScreen = () => {
     const navigation = useNavigation();
-    const userName = 'Sabrina Carpenter'
+    const userName = 'Sabrina Carpenter';
 
     return (
         <SafeAreaView style={styles.safeContainer}>
@@ -39,29 +38,34 @@ const HomeScreen = () => {
                         <Ionicons name={getGreetingIcon()} size={20} color="#FFFFFF" style={{ position: 'relative', top: 3 }} />
                         {'\u00A0'}{getGreeting()}, {userName.split(' ')[0]}
                     </Text>
-                    <Image source={require('../assets/user-red.png')} style={styles.profilePic} />
+                    <Image source={require('../assets/user-profile-pic.png')} style={styles.profilePic} />
                 </View>
 
                 <View style={styles.buttonGrid}>
-                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Staff Directory')}>
-                        <Ionicons name='business-outline' size={28} color={colours.darkgray} />
-                        <Text style={styles.buttonText}>Staff Directory</Text>
-                    </TouchableOpacity>
+                    <View style={styles.buttonRow}>
+                        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Staff Directory')}>
+                            <Ionicons name='business-outline' size={28} color={colours.darkgray} />
+                            <Text style={styles.buttonText}>Staff Directory</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Intranet')}>
+                            <Ionicons name='globe-outline' size={28} color={colours.darkgray} />
+                            <Text style={styles.buttonText}>Intranet</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.buttonRow}>
+                        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('User Profile')}>
+                            <Ionicons name='person-outline' size={28} color={colours.darkgray} />
+                            <Text style={styles.buttonText}>Profile</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={[styles.button, styles.logoutButton]}>
+                            <Ionicons name='log-out-outline' size={28} color={'#FFFFFF'} />
+                            <Text style={styles.logoutText}>Log Out</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
 
-                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Intranet')}>
-                        <Ionicons name='globe-outline' size={28} color={colours.darkgray} />
-                        <Text style={styles.buttonText}>Intranet</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('User Profile')}>
-                        <Ionicons name='person-outline' size={28} color={colours.darkgray} />
-                        <Text style={styles.buttonText}>Profile</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.logoutButton}>
-                        <Ionicons name='log-out-outline' size={28} color={'#FFFFFF'} />
-                        <Text style={styles.logoutText}>Log Out</Text>
-                    </TouchableOpacity>
+                <View style={styles.LogoContainer}>
+                    <Image source={require('../assets/roi.png')} style={styles.roiLogo} />
                 </View>
             </View>
         </SafeAreaView>
@@ -72,6 +76,15 @@ const styles = StyleSheet.create({
     safeContainer: {
         flex: 1,
         backgroundColor: '#FFFFFF',
+    },
+    LogoContainer: {
+        alignItems: 'center',
+        marginTop: 20,
+    },
+    roiLogo: {
+        width: 150,
+        height: 150,
+        resizeMode: 'contain',
     },
     container: {
         flex: 1,
@@ -98,20 +111,21 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
     buttonGrid: {
+        marginBottom: 24,
+    },
+    buttonRow: {
         flexDirection: 'row',
-        flexWrap: 'wrap',
         justifyContent: 'space-between',
-        rowGap: 12,
-        columnGap: 12,
+        marginBottom: 16,
     },
     button: {
-        width: (screenWidth - 60) / 2,
+        flex: 1,
         aspectRatio: 1,
         backgroundColor: colours.lightgray,
         borderRadius: 12,
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 10,
+        marginHorizontal: 6,
     },
     buttonText: {
         color: colours.darkgray,
@@ -122,12 +136,6 @@ const styles = StyleSheet.create({
     },
     logoutButton: {
         backgroundColor: colours.red,
-        width: (screenWidth - 60) / 2,
-        aspectRatio: 1,
-        borderRadius: 12,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: 10,
     },
     logoutText: {
         color: '#FFFFFF',

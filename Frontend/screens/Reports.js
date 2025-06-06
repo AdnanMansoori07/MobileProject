@@ -40,7 +40,7 @@ const Reports = () => {
             <View style={styles.header}>
                 <Text style={styles.headerText}>Reports</Text>
                 <Image
-                    source={require('../assets/user-red.png')}
+                    source={require('../assets/user-profile-pic.png')}
                     style={styles.profilePic}
                 />
             </View>
@@ -55,7 +55,7 @@ const Reports = () => {
             <FlatList
                 data={dummyStaffList}
                 keyExtractor={(item, index) => index.toString()}
-                contentContainerStyle={{ paddingBottom: 20 }}
+                contentContainerStyle={{ paddingBottom: 90 }}
                 renderItem={({ item }) => (
                     <TouchableOpacity style={styles.card}>
                         <View style={styles.cardLeft}>

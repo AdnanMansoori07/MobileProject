@@ -1,11 +1,20 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import DepartmentDropdown from '../components/DepartmentDropdown';
 
 const colours = {
     darkgray: "#262626"
 }
+
+const departments = [
+    { id: 0, name: "General" },
+    { id: 1, name: "Information Communications Technology" },
+    { id: 2, name: "Finance" },
+    { id: 3, name: "Marketing" },
+    { id: 4, name: "Human Resources" }
+];
 
 const AddStaff = () => {
 
@@ -18,7 +27,28 @@ const AddStaff = () => {
     const [postcode, setPostcode] = React.useState('');
     const [city, setCity] = React.useState('');
     const [country, setCountry] = React.useState('');
-    const [department, setDepartment] = React.useState('');
+    const [department, setDepartment] = React.useState(departments[0].id);
+
+    const handleSave = () => {
+        const payload = `name=${name}&phone=${phone}&department=${department}&addressStreet=${address}&addressCity=${city}&addressState=&addressZIP=${postcode}&addressCountry=${country}`;
+
+        fetch('http://10.0.0.132:44374/WebService1.asmx/AddPerson', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: payload
+        })
+            .then(response => response.text())
+            .then(text => {
+                console.log('Saved', text);
+                alert("Staff saved")
+                navigation.goBack();
+            })
+            .catch(error => {
+                console.error('Error saving staff: ', error)
+            })
+    }
 
 
     return (
@@ -28,7 +58,7 @@ const AddStaff = () => {
                     Add Staff
                 </Text>
                 <Image
-                    source={require('../assets/user-red.png')}
+                    source={require('../assets/user-profile-pic.png')}
                     style={styles.profilePic}
                 />
             </View>
@@ -51,15 +81,6 @@ const AddStaff = () => {
                     value={phone}
                     onChangeText={setPhone}
                     placeholder='Phone Number'
-                    placeholderTextColor='#888'
-                    style={styles.input}
-                />
-            </View>
-            <View style={styles.inputBox}>
-                <TextInput
-                    value={email}
-                    onChangeText={setEmail}
-                    placeholder='Email'
                     placeholderTextColor='#888'
                     style={styles.input}
                 />
@@ -101,20 +122,22 @@ const AddStaff = () => {
                 />
             </View>
 
-            <View style={styles.inputBox}>
-                <TextInput
-                    value={department}
-                    onChangeText={setDepartment}
-                    placeholder='Department'
-                    placeholderTextColor='#888'
-                    style={styles.input}
-                />
-            </View>
+            <DepartmentDropdown
+                value={department}
+                onChange={setDepartment}
+                departments={departments}
+            />
+            <TouchableOpacity
+                style={styles.saveButton}
+                onPress={() => handleSave()}
+            >
+                <Text style={styles.saveButtonText}>Save</Text>
+            </TouchableOpacity>
             <TouchableOpacity
                 style={styles.saveButton}
                 onPress={() => navigation.goBack()}
             >
-                <Text style={styles.saveButtonText}>Save</Text>
+                <Text style={styles.saveButtonText}>Back</Text>
             </TouchableOpacity>
         </SafeAreaView>
     )

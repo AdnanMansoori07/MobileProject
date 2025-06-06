@@ -43,7 +43,7 @@ const Files = () => {
             <View style={styles.header}>
                 <Text style={styles.headerText}>Files</Text>
                 <Image
-                    source={require('../assets/user-red.png')}
+                    source={require('../assets/user-profile-pic.png')}
                     style={styles.profilePic}
                 />
             </View>
@@ -58,7 +58,7 @@ const Files = () => {
             <FlatList
                 data={dummyStaffList}
                 keyExtractor={(item, index) => index.toString()}
-                contentContainerStyle={{ paddingBottom: 20 }}
+                contentContainerStyle={{ paddingBottom: 90 }}
                 renderItem={({ item }) => (
                     <TouchableOpacity style={styles.card}>
                         <View style={styles.cardLeft}>

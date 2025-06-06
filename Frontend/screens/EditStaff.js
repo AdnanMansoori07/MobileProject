@@ -1,126 +1,177 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import DepartmentDropdown from '../components/DepartmentDropdown';
 
 const colours = {
     darkgray: "#262626"
-}
+};
+
+const departments = [
+    { id: 1, name: 'Information Communications Technology' },
+    { id: 2, name: 'Finance' },
+    { id: 3, name: 'Marketing' },
+    { id: 4, name: 'Human Resources' }
+];
 
 const EditStaff = () => {
-    // TO BE CHANGED
     const navigation = useNavigation();
     const route = useRoute();
-    const { name = 'N/A', phone = 'N/A', email = 'N/A', department = 'N/A' } = route.params || {};
-    const [address, setAddress] = React.useState('123 LA Street');
-    const [postcode, setPostcode] = React.useState('0000');
-    const [city, setCity] = React.useState('Sydney');
-    const [country, setCountry] = React.useState('Australia');
-    const [nameState, setName] = React.useState(name);
-    const [phoneState, setPhone] = React.useState(phone);
-    const [emailState, setEmail] = React.useState(email);
-    const [departmentState, setDepartment] = React.useState(department);
-    // TO BE CHANGED
+    // destructure every field with fallback defaults
+    const {
+        id = '',
+        name = '',
+        phone = '',
+        department = '',
+        addressStreet = '',
+        addressCity = '',
+        addressState = '',
+        addressZIP = '',
+        addressCountry = ''
+    } = route.params || {};
 
+    // Always use fallback for state
+    const [nameState, setName] = useState(name || '');
+    const [phoneState, setPhone] = useState(phone || '');
+    const [departmentState, setDepartment] = useState(department || '');
+    const [addressStreetState, setAddressStreet] = useState(addressStreet || '');
+    const [addressCityState, setAddressCity] = useState(addressCity || '');
+    const [addressStateState, setAddressState] = useState(addressState || '');
+    const [addressZIPState, setAddressZIP] = useState(addressZIP || '');
+    const [addressCountryState, setAddressCountry] = useState(addressCountry || '');
+
+    const getDepartmentId = (deptName) => {
+        const found = departments.find(d => d.name === deptName);
+        return found ? found.id : '';
+    };
+
+    const handleSave = () => {
+        if (!id) {
+            alert("No staff ID found.");
+            return;
+        }
+        const params =
+            `id=${encodeURIComponent(id)}&` +
+            `name=${encodeURIComponent(nameState)}&` +
+            `phone=${encodeURIComponent(phoneState)}&` +
+            `department=${getDepartmentId(departmentState)}&` +
+            `addressStreet=${encodeURIComponent(addressStreetState)}&` +
+            `addressCity=${encodeURIComponent(addressCityState)}&` +
+            `addressState=${encodeURIComponent(addressStateState)}&` +
+            `addressZIP=${encodeURIComponent(addressZIPState)}&` +
+            `addressCountry=${encodeURIComponent(addressCountryState)}`;
+
+        fetch('http://10.0.0.132:44374/WebService1.asmx/UpdatePerson', {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: params
+        })
+            .then(res => res.text())
+            .then(() => {
+                navigation.goBack();
+            })
+            .catch(err => {
+                alert('Failed to update staff: ' + err);
+            });
+    };
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.header}>
-                <Text style={styles.headerText}>
-                    Edit Profile
-                </Text>
-                <Image
-                    source={require('../assets/user-red.png')}
-                    style={styles.profilePic}
-                />
-            </View>
+            <ScrollView>
+                <View style={styles.header}>
+                    <Text style={styles.headerText}>Edit Profile</Text>
+                    <Image
+                        source={require('../assets/user-profile-pic.png')}
+                        style={styles.profilePic}
+                    />
+                </View>
 
-            <View style={styles.profileImageWrapper}>
-                <Image source={require('../assets/user-red.png')} style={styles.profileImage} />
-            </View>
+                <View style={styles.profileImageWrapper}>
+                    <Image source={require('../assets/user-red.png')} style={styles.profileImage} />
+                </View>
 
-            <View style={styles.inputBox}>
-                <TextInput
-                    value={nameState}
-                    onChangeText={setName}
-                    placeholder={name}
-                    placeholderTextColor='#888'
-                    style={styles.input}
-                />
-            </View>
-            <View style={styles.inputBox}>
-                <TextInput
-                    value={phoneState}
-                    onChangeText={setPhone}
-                    placeholder={phone}
-                    placeholderTextColor='#888'
-                    style={styles.input}
-                />
-            </View>
-            <View style={styles.inputBox}>
-                <TextInput
-                    value={emailState}
-                    onChangeText={setEmail}
-                    placeholder={email}
-                    placeholderTextColor='#888'
-                    style={styles.input}
-                />
-            </View>
-            <View style={styles.inputBox}>
-                <TextInput
-                    value={address}
-                    onChangeText={setAddress}
-                    placeholder={address}
-                    placeholderTextColor='#888'
-                    style={styles.input}
-                />
-            </View>
-            <View style={styles.inputBox}>
-                <TextInput
-                    value={postcode}
-                    onChangeText={setPostcode}
-                    placeholder={postcode}
-                    placeholderTextColor='#888'
-                    style={styles.input}
-                />
-            </View>
-            <View style={styles.inputBox}>
-                <TextInput
-                    value={city}
-                    onChangeText={setCity}
-                    placeholder={city}
-                    placeholderTextColor='#888'
-                    style={styles.input}
-                />
-            </View>
-            <View style={styles.inputBox}>
-                <TextInput
-                    value={country}
-                    onChangeText={setCountry}
-                    placeholder={country}
-                    placeholderTextColor='#888'
-                    style={styles.input}
-                />
-            </View>
+                <View style={styles.inputBox}>
+                    <TextInput
+                        value={nameState}
+                        onChangeText={setName}
+                        placeholder="Name"
+                        placeholderTextColor='#888'
+                        style={styles.input}
+                    />
+                </View>
+                <View style={styles.inputBox}>
+                    <TextInput
+                        value={phoneState}
+                        onChangeText={setPhone}
+                        placeholder="Phone"
+                        placeholderTextColor='#888'
+                        style={styles.input}
+                    />
+                </View>
 
-            <View style={styles.inputBox}>
-                <TextInput
-                    value={departmentState}
-                    onChangeText={setDepartment}
-                    placeholder={department}
-                    placeholderTextColor='#888'
-                    style={styles.input}
+                <DepartmentDropdown
+                    selectedDepartment={departmentState}
+                    onChange={setDepartment}
+                    departments={departments}
                 />
-            </View>
-            <TouchableOpacity
-                style={styles.saveButton}
-                onPress={() => navigation.goBack()}
-            >
-                <Text style={styles.saveButtonText}>Save</Text>
-            </TouchableOpacity>
+
+                <View style={styles.inputBox}>
+                    <TextInput
+                        value={addressStreetState}
+                        onChangeText={setAddressStreet}
+                        placeholder="Street"
+                        placeholderTextColor='#888'
+                        style={styles.input}
+                    />
+                </View>
+                <View style={styles.inputBox}>
+                    <TextInput
+                        value={addressCityState}
+                        onChangeText={setAddressCity}
+                        placeholder="City"
+                        placeholderTextColor='#888'
+                        style={styles.input}
+                    />
+                </View>
+                <View style={styles.inputBox}>
+                    <TextInput
+                        value={addressStateState}
+                        onChangeText={setAddressState}
+                        placeholder="State"
+                        placeholderTextColor='#888'
+                        style={styles.input}
+                    />
+                </View>
+                <View style={styles.inputBox}>
+                    <TextInput
+                        value={addressZIPState}
+                        onChangeText={setAddressZIP}
+                        placeholder="ZIP"
+                        placeholderTextColor='#888'
+                        style={styles.input}
+                    />
+                </View>
+                <View style={styles.inputBox}>
+                    <TextInput
+                        value={addressCountryState}
+                        onChangeText={setAddressCountry}
+                        placeholder="Country"
+                        placeholderTextColor='#888'
+                        style={styles.input}
+                    />
+                </View>
+
+                <TouchableOpacity
+                    style={styles.saveButton}
+                    onPress={handleSave}
+                >
+                    <Text style={styles.saveButtonText}>Save</Text>
+                </TouchableOpacity>
+            </ScrollView>
         </SafeAreaView>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {

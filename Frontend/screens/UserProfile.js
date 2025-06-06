@@ -13,7 +13,7 @@ const UserProfile = () => {
 
     const [name, setName] = React.useState('Sabrina Carpenter');
     const [phone, setPhone] = React.useState('02 2000 2000');
-    const [email, setEmail] = React.useState('sabrina.carpenter@roi.com.au');
+    const [email, setEmail] = React.useState('sabrinacarpenter@roi.com.au');
     const [address, setAddress] = React.useState('123 LA Street');
     const [postcode, setPostcode] = React.useState('0000');
     const [city, setCity] = React.useState('Sydney');
@@ -28,13 +28,13 @@ const UserProfile = () => {
                     My Profile
                 </Text>
                 <Image
-                    source={require('../assets/user-red.png')}
+                    source={require('../assets/user-profile-pic.png')}
                     style={styles.profilePic}
                 />
             </View>
 
             <View style={styles.profileImageWrapper}>
-                <Image source={require('../assets/user-red.png')} style={styles.profileImage} />
+                <Image source={require('../assets/user-profile-pic.png')} style={styles.profileImage} />
             </View>
 
             <View style={styles.inputBox}>

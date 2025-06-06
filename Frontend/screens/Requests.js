@@ -21,7 +21,6 @@ const leaveTypes = [
 const Requests = () => {
     const navigation = useNavigation();
 
-    // DropDownPicker state
     const [open, setOpen] = React.useState(false);
     const [leaveType, setLeaveType] = React.useState(leaveTypes[0].value);
     const [items, setItems] = React.useState(leaveTypes);
@@ -35,7 +34,7 @@ const Requests = () => {
             <View style={styles.header}>
                 <Text style={styles.headerText}>Request</Text>
                 <Image
-                    source={require('../assets/user-red.png')}
+                    source={require('../assets/user-profile-pic.png')}
                     style={styles.profilePic}
                 />
             </View>
@@ -44,7 +43,6 @@ const Requests = () => {
                 <Ionicons name="calendar-outline" size={64} color="#262626" />
             </View>
 
-            {/* DropDownPicker here */}
             <View style={{ marginBottom: 10, zIndex: 10 }}>
                 <DropDownPicker
                     open={open}
