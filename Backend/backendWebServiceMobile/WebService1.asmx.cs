@@ -18,34 +18,43 @@ namespace backendWebServiceMobile
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
-    // [System.Web.Script.Services.ScriptService]
+   [System.Web.Script.Services.ScriptService]
     public class WebService1 : System.Web.Services.WebService
     {
 
         [WebMethod]
         public void AddPerson(string name, string phone, int department, string addressStreet, string addressCity, string addressState, string addressZIP, string addressCountry)
         {
-            var file = Path.Combine(HttpRuntime.AppDomainAppPath, "People.xml");
+            try
+            {
+                var file = Path.Combine(HttpRuntime.AppDomainAppPath, "People.xml");
 
-            var xdoc = XDocument.Load(file);
+                var xdoc = XDocument.Load(file);
 
-            int maxID = xdoc.Descendants("Person").Max(b => (int) b.Attribute("id"));
-            int newID = maxID + 1;
+                int maxID = xdoc.Descendants("Person").Max(b => (int)b.Attribute("id"));
+                int newID = maxID + 1;
 
-            XElement newPerson = new XElement("Person");
+                XElement newPerson = new XElement("Person");
 
-            newPerson.Add(new XAttribute("id", newID));
-            newPerson.Add(new XElement("name", name));
-            newPerson.Add(new XElement("phone", phone));
-            newPerson.Add(new XElement("department", department));
-            newPerson.Add(new XElement("addressStreet", addressStreet));
-            newPerson.Add(new XElement("addressCity", addressCity));
-            newPerson.Add(new XElement("addressState", addressState));
-            newPerson.Add(new XElement("addressZIP", addressZIP));
-            newPerson.Add(new XElement("addressCountry", addressCountry));
+                newPerson.Add(new XAttribute("id", newID));
+                newPerson.Add(new XElement("name", name));
+                newPerson.Add(new XElement("phone", phone));
+                newPerson.Add(new XElement("department", department));
+                newPerson.Add(new XElement("addressStreet", addressStreet));
+                newPerson.Add(new XElement("addressCity", addressCity));
+                newPerson.Add(new XElement("addressState", addressState));
+                newPerson.Add(new XElement("addressZIP", addressZIP));
+                newPerson.Add(new XElement("addressCountry", addressCountry));
 
-            xdoc.Root.Add(newPerson);
-            xdoc.Save(file);
+                xdoc.Root.Add(newPerson);
+                xdoc.Save(file);
+            }
+            catch (Exception ex)
+            {
+                Context.Response.StatusCode = 500;
+                Context.Response.Write("Error: " + ex.ToString());
+            }
+            
 
         }
 
@@ -66,43 +75,61 @@ namespace backendWebServiceMobile
 
         public void UpdatePerson(int id, string name, string phone, int department, string addressStreet, string addressCity, string addressState, string addressZIP, string addressCountry)
         {
-            var file = Path.Combine(HttpRuntime.AppDomainAppPath, "People.xml");
-            var xdoc = XDocument.Load(file);
 
-            var person = xdoc.Descendants("Person").Single(b => int.Parse(b.Attribute("id").Value) == id);
+            try
+            {
+                var file = Path.Combine(HttpRuntime.AppDomainAppPath, "People.xml");
+                var xdoc = XDocument.Load(file);
 
-            person.SetElementValue("name", name);
-            person.SetElementValue("phone", phone);
-            person.SetElementValue("department", department);
-            person.SetElementValue("addressStreet", addressStreet);
-            person.SetElementValue("addressCity", addressCity);
-            person.SetElementValue("addressState", addressState);
-            person.SetElementValue("addressZIP", addressZIP);
-            person.SetElementValue("addressCountry", addressCountry);
+                var person = xdoc.Descendants("Person").Single(b => int.Parse(b.Attribute("id").Value) == id);
 
-            xdoc.Save(file);
+                person.SetElementValue("name", name);
+                person.SetElementValue("phone", phone);
+                person.SetElementValue("department", department);
+                person.SetElementValue("addressStreet", addressStreet);
+                person.SetElementValue("addressCity", addressCity);
+                person.SetElementValue("addressState", addressState);
+                person.SetElementValue("addressZIP", addressZIP);
+                person.SetElementValue("addressCountry", addressCountry);
+
+                xdoc.Save(file);
+            }
+            catch(Exception ex)
+            {
+                Context.Response.StatusCode = 500;
+                Context.Response.Write("Error: " + ex.ToString());
+            }
+            
         }
 
         [WebMethod]
         public void GetPeople()
         {
-            var file = Path.Combine(HttpRuntime.AppDomainAppPath, "People.xml");
-            var doc = XDocument.Load(file);
-            var elements = doc.Root.Elements();
-
-            List<People> peopleList = new List<People>();
-
-            foreach (XElement element in elements)
+            try
             {
-                People people = new People();
-                people.id = int.Parse(element.Attribute("id").Value);
-                people.name = element.Element("name").Value;
-                people.phone = element.Element("phone").Value;
-                string departmentValue = element.Element("department").Value;
-                people.department = Departments.FirstOrDefault(x => x.id == Int32.Parse(departmentValue));
-                peopleList.Add(people);
+                var file = Path.Combine(HttpRuntime.AppDomainAppPath, "People.xml");
+                var doc = XDocument.Load(file);
+                var elements = doc.Root.Elements();
+
+                List<People> peopleList = new List<People>();
+
+                foreach (XElement element in elements)
+                {
+                    People people = new People();
+                    people.id = int.Parse(element.Attribute("id").Value);
+                    people.name = element.Element("name").Value;
+                    people.phone = element.Element("phone").Value;
+                    string departmentValue = element.Element("department").Value;
+                    people.department = Departments.FirstOrDefault(x => x.id == Int32.Parse(departmentValue));
+                    peopleList.Add(people);
+                }
+                Context.Response.Write(new JavaScriptSerializer().Serialize(peopleList));
             }
-            Context.Response.Write(new JavaScriptSerializer().Serialize(peopleList));
+            catch (Exception ex)
+            {
+                Context.Response.StatusCode = 500;
+                Context.Response.Write("Error: " + ex.ToString());
+            }
         }
 
 
