@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { AsyncStorage } from 'react-native'; // For Expo SDK 48 or below
-// If using Expo SDK 49+, use: import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AsyncStorage } from 'react-native';
 
 export const FontSizeContext = createContext();
 

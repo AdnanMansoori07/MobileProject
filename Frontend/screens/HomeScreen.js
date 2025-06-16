@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from 'rea
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { FontSizeContext } from '../components/FontSizeContext'; // <--- Update this import path!
+import { FontSizeContext } from '../components/FontSizeContext';
 
 const colours = {
     darkgray: '#262626',
