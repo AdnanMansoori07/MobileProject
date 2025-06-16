@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { FontSizeContext } from '../components/FontSizeContext'; // <--- Update this import path!
 
 const colours = {
     darkgray: '#262626',
@@ -30,12 +31,14 @@ const HomeScreen = () => {
     const navigation = useNavigation();
     const userName = 'Sabrina Carpenter';
 
+    const { fontSize } = useContext(FontSizeContext);
+
     return (
         <SafeAreaView style={styles.safeContainer}>
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={styles.greeting}>
-                        <Ionicons name={getGreetingIcon()} size={20} color="#FFFFFF" style={{ position: 'relative', top: 3 }} />
+                    <Text style={[styles.greeting, { fontSize }]}>
+                        <Ionicons name={getGreetingIcon()} size={fontSize + 4} color="#FFFFFF" style={{ position: 'relative', top: 3 }} />
                         {'\u00A0'}{getGreeting()}, {userName.split(' ')[0]}
                     </Text>
                     <Image source={require('../assets/user-profile-pic.png')} style={styles.profilePic} />
@@ -44,22 +47,22 @@ const HomeScreen = () => {
                 <View style={styles.buttonGrid}>
                     <View style={styles.buttonRow}>
                         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Staff Directory')}>
-                            <Ionicons name='business-outline' size={28} color={colours.darkgray} />
-                            <Text style={styles.buttonText}>Staff Directory</Text>
+                            <Ionicons name='business-outline' size={fontSize + 12} color={colours.darkgray} />
+                            <Text style={[styles.buttonText, { fontSize }]} >Staff Directory</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Intranet')}>
-                            <Ionicons name='globe-outline' size={28} color={colours.darkgray} />
-                            <Text style={styles.buttonText}>Intranet</Text>
+                            <Ionicons name='globe-outline' size={fontSize + 12} color={colours.darkgray} />
+                            <Text style={[styles.buttonText, { fontSize }]} >Intranet</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.buttonRow}>
                         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('User Profile')}>
-                            <Ionicons name='person-outline' size={28} color={colours.darkgray} />
-                            <Text style={styles.buttonText}>Profile</Text>
+                            <Ionicons name='person-outline' size={fontSize + 12} color={colours.darkgray} />
+                            <Text style={[styles.buttonText, { fontSize }]} >Profile</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={[styles.button, styles.logoutButton]}>
-                            <Ionicons name='log-out-outline' size={28} color={'#FFFFFF'} />
-                            <Text style={styles.logoutText}>Log Out</Text>
+                            <Ionicons name='log-out-outline' size={fontSize + 12} color={'#FFFFFF'} />
+                            <Text style={[styles.logoutText, { fontSize }]} >Log Out</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -101,7 +104,6 @@ const styles = StyleSheet.create({
     },
     greeting: {
         color: '#FFFFFF',
-        fontSize: 16,
         fontWeight: 'bold',
         fontFamily: 'Trebuchet MS',
     },

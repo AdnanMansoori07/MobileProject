@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import DepartmentDropdown from '../components/DepartmentDropdown';
+import { FontSizeContext } from '../components/FontSizeContext';
 
 const colours = {
     darkgray: "#262626"
@@ -17,8 +18,8 @@ const departments = [
 ];
 
 const AddStaff = () => {
-
     const navigation = useNavigation();
+    const { fontSize } = useContext(FontSizeContext);
 
     const [name, setName] = React.useState('');
     const [phone, setPhone] = React.useState('');
@@ -28,11 +29,12 @@ const AddStaff = () => {
     const [city, setCity] = React.useState('');
     const [country, setCountry] = React.useState('');
     const [department, setDepartment] = React.useState(departments[0].id);
+    const [state, setState] = React.useState('');
 
     const handleSave = () => {
-        const payload = `name=${name}&phone=${phone}&department=${department}&addressStreet=${address}&addressCity=${city}&addressState=&addressZIP=${postcode}&addressCountry=${country}`;
+        const payload = `name=${name}&phone=${phone}&department=${department}&addressStreet=${address}&addressCity=${city}&addressState=&addressZIP=${postcode}&addressCountry=${country}&addressState=${state}`;
 
-        fetch('http://10.0.0.132:44374/WebService1.asmx/AddPerson', {
+        fetch('http://localhost:44374/WebService1.asmx/AddPerson', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -50,11 +52,10 @@ const AddStaff = () => {
             })
     }
 
-
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.headerText}>
+                <Text style={[styles.headerText, { fontSize }]}>
                     Add Staff
                 </Text>
                 <Image
@@ -73,7 +74,7 @@ const AddStaff = () => {
                     onChangeText={setName}
                     placeholder='Name'
                     placeholderTextColor='#888'
-                    style={styles.input}
+                    style={[styles.input, { fontSize }]}
                 />
             </View>
             <View style={styles.inputBox}>
@@ -82,7 +83,7 @@ const AddStaff = () => {
                     onChangeText={setPhone}
                     placeholder='Phone Number'
                     placeholderTextColor='#888'
-                    style={styles.input}
+                    style={[styles.input, { fontSize }]}
                 />
             </View>
             <View style={styles.inputBox}>
@@ -91,7 +92,7 @@ const AddStaff = () => {
                     onChangeText={setAddress}
                     placeholder='Address'
                     placeholderTextColor='#888'
-                    style={styles.input}
+                    style={[styles.input, { fontSize }]}
                 />
             </View>
             <View style={styles.inputBox}>
@@ -100,7 +101,7 @@ const AddStaff = () => {
                     onChangeText={setPostcode}
                     placeholder='Postcode'
                     placeholderTextColor='#888'
-                    style={styles.input}
+                    style={[styles.input, { fontSize }]}
                 />
             </View>
             <View style={styles.inputBox}>
@@ -109,7 +110,16 @@ const AddStaff = () => {
                     onChangeText={setCity}
                     placeholder='City'
                     placeholderTextColor='#888'
-                    style={styles.input}
+                    style={[styles.input, { fontSize }]}
+                />
+            </View>
+            <View style={styles.inputBox}>
+                <TextInput
+                    value={state}
+                    onChangeText={setState}
+                    placeholder='State'
+                    placeholderTextColor='#888'
+                    style={[styles.input, { fontSize }]}
                 />
             </View>
             <View style={styles.inputBox}>
@@ -118,7 +128,7 @@ const AddStaff = () => {
                     onChangeText={setCountry}
                     placeholder='Country'
                     placeholderTextColor='#888'
-                    style={styles.input}
+                    style={[styles.input, { fontSize }]}
                 />
             </View>
 
@@ -126,18 +136,19 @@ const AddStaff = () => {
                 value={department}
                 onChange={setDepartment}
                 departments={departments}
+                fontSize={fontSize}
             />
             <TouchableOpacity
                 style={styles.saveButton}
                 onPress={() => handleSave()}
             >
-                <Text style={styles.saveButtonText}>Save</Text>
+                <Text style={[styles.saveButtonText, { fontSize }]}>Save</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 style={styles.saveButton}
                 onPress={() => navigation.goBack()}
             >
-                <Text style={styles.saveButtonText}>Back</Text>
+                <Text style={[styles.saveButtonText, { fontSize }]}>Back</Text>
             </TouchableOpacity>
         </SafeAreaView>
     )
@@ -159,7 +170,6 @@ const styles = StyleSheet.create({
     },
     headerText: {
         color: '#FFFFFF',
-        fontSize: 16,
         fontFamily: 'Trebuchet MS',
         fontWeight: 'bold'
     },
@@ -176,7 +186,6 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     input: {
-        fontSize: 16,
         fontFamily: 'Trebuchet MS',
         color: '#000'
     },
@@ -205,7 +214,6 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontWeight: 'bold',
         fontFamily: 'Trebuchet MS',
-        fontSize: 16,
     },
 });
 

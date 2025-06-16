@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { FontSizeContext } from '../components/FontSizeContext';
 
 const colours = {
     darkgray: "#262626",
@@ -20,6 +21,7 @@ const leaveTypes = [
 
 const Requests = () => {
     const navigation = useNavigation();
+    const { fontSize } = useContext(FontSizeContext);
 
     const [open, setOpen] = React.useState(false);
     const [leaveType, setLeaveType] = React.useState(leaveTypes[0].value);
@@ -32,7 +34,7 @@ const Requests = () => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.headerText}>Request</Text>
+                <Text style={[styles.headerText, { fontSize }]}>Request</Text>
                 <Image
                     source={require('../assets/user-profile-pic.png')}
                     style={styles.profilePic}
@@ -40,7 +42,7 @@ const Requests = () => {
             </View>
 
             <View style={styles.profileImageWrapper}>
-                <Ionicons name="calendar-outline" size={64} color="#262626" />
+                <Ionicons name="calendar-outline" size={fontSize * 4} color="#262626" />
             </View>
 
             <View style={{ marginBottom: 10, zIndex: 10 }}>
@@ -52,7 +54,7 @@ const Requests = () => {
                     setValue={setLeaveType}
                     setItems={setItems}
                     style={styles.dropdown}
-                    textStyle={styles.dropdownText}
+                    textStyle={[styles.dropdownText, { fontSize }]}
                     dropDownContainerStyle={{ borderRadius: 8 }}
                     placeholder="Select Leave Type"
                 />
@@ -64,7 +66,7 @@ const Requests = () => {
                     onChangeText={setStartDate}
                     placeholder='Start Date (YYYY-MM-DD)'
                     placeholderTextColor='#888'
-                    style={styles.input}
+                    style={[styles.input, { fontSize }]}
                 />
             </View>
             <View style={styles.inputBox}>
@@ -73,7 +75,7 @@ const Requests = () => {
                     onChangeText={setEndDate}
                     placeholder='End Date (YYYY-MM-DD)'
                     placeholderTextColor='#888'
-                    style={styles.input}
+                    style={[styles.input, { fontSize }]}
                 />
             </View>
             <View style={styles.inputBox}>
@@ -82,7 +84,7 @@ const Requests = () => {
                     onChangeText={setReason}
                     placeholder='Reason'
                     placeholderTextColor='#888'
-                    style={[styles.input, { height: 80, textAlignVertical: 'top' }]}
+                    style={[styles.input, { fontSize, height: 80, textAlignVertical: 'top' }]}
                     multiline
                 />
             </View>
@@ -90,7 +92,7 @@ const Requests = () => {
                 style={styles.submitButton}
                 onPress={() => navigation.goBack()}
             >
-                <Text style={styles.submitButtonText}>Submit Request</Text>
+                <Text style={[styles.submitButtonText, { fontSize }]}>Submit Request</Text>
             </TouchableOpacity>
         </SafeAreaView>
     );
@@ -112,7 +114,6 @@ const styles = StyleSheet.create({
     },
     headerText: {
         color: '#FFFFFF',
-        fontSize: 16,
         fontFamily: 'Trebuchet MS',
         fontWeight: 'bold'
     },
@@ -137,7 +138,6 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     input: {
-        fontSize: 16,
         fontFamily: 'Trebuchet MS',
         color: '#000'
     },
@@ -149,7 +149,6 @@ const styles = StyleSheet.create({
     },
     dropdownText: {
         fontFamily: 'Trebuchet MS',
-        fontSize: 16,
         color: '#000',
     },
     submitButton: {
@@ -163,7 +162,6 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontWeight: 'bold',
         fontFamily: 'Trebuchet MS',
-        fontSize: 16,
     },
 });
 

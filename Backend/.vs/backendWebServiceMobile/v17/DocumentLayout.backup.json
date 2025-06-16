@@ -15,12 +15,12 @@
       "RelativeMoniker": "D:0:0:{7AB101BC-25DA-43F2-AFC9-D485260155DF}|backendWebServiceMobile\\backendWebServiceMobile.csproj|solutionrelative:backendwebservicemobile\\people.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7AB101BC-25DA-43F2-AFC9-D485260155DF}|backendWebServiceMobile\\backendWebServiceMobile.csproj|C:\\Users\\adnan\\Desktop\\Mobile Application\\Backend\\backendwebservicemobile\\department.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{7AB101BC-25DA-43F2-AFC9-D485260155DF}|backendWebServiceMobile\\backendWebServiceMobile.csproj|solutionrelative:backendwebservicemobile\\department.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7AB101BC-25DA-43F2-AFC9-D485260155DF}|backendWebServiceMobile\\backendWebServiceMobile.csproj|C:\\Users\\adnan\\Desktop\\Mobile Application\\Backend\\backendwebservicemobile\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7AB101BC-25DA-43F2-AFC9-D485260155DF}|backendWebServiceMobile\\backendWebServiceMobile.csproj|solutionrelative:backendwebservicemobile\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AB101BC-25DA-43F2-AFC9-D485260155DF}|backendWebServiceMobile\\backendWebServiceMobile.csproj|C:\\Users\\adnan\\Desktop\\Mobile Application\\Backend\\backendwebservicemobile\\department.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{7AB101BC-25DA-43F2-AFC9-D485260155DF}|backendWebServiceMobile\\backendWebServiceMobile.csproj|solutionrelative:backendwebservicemobile\\department.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7AB101BC-25DA-43F2-AFC9-D485260155DF}|backendWebServiceMobile\\backendWebServiceMobile.csproj|C:\\Users\\adnan\\Desktop\\Mobile Application\\Backend\\backendwebservicemobile\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
@@ -51,7 +51,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Department.xml",
               "DocumentMoniker": "C:\\Users\\adnan\\Desktop\\Mobile Application\\Backend\\backendWebServiceMobile\\Department.xml",
               "RelativeDocumentMoniker": "backendWebServiceMobile\\Department.xml",
@@ -59,8 +59,7 @@
               "RelativeToolTip": "backendWebServiceMobile\\Department.xml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
-              "WhenOpened": "2025-05-05T00:46:30.97Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-05T00:46:30.97Z"
             },
             {
               "$type": "Document",
@@ -70,14 +69,14 @@
               "RelativeDocumentMoniker": "backendWebServiceMobile\\WebService1.asmx.cs",
               "ToolTip": "C:\\Users\\adnan\\Desktop\\Mobile Application\\Backend\\backendWebServiceMobile\\WebService1.asmx.cs",
               "RelativeToolTip": "backendWebServiceMobile\\WebService1.asmx.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADYAAABCAAAAAAAAAA==",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAuwFAAAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-05T00:42:42.844Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "Department.cs",
               "DocumentMoniker": "C:\\Users\\adnan\\Desktop\\Mobile Application\\Backend\\backendWebServiceMobile\\Department.cs",
               "RelativeDocumentMoniker": "backendWebServiceMobile\\Department.cs",
@@ -85,8 +84,7 @@
               "RelativeToolTip": "backendWebServiceMobile\\Department.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T00:38:05.047Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-05T00:38:05.047Z"
             },
             {
               "$type": "Document",
@@ -98,8 +96,7 @@
               "RelativeToolTip": "backendWebServiceMobile\\People.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T00:37:39.541Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-05T00:37:39.541Z"
             },
             {
               "$type": "Document",
@@ -109,10 +106,9 @@
               "RelativeDocumentMoniker": "backendWebServiceMobile\\People.xml",
               "ToolTip": "C:\\Users\\adnan\\Desktop\\Mobile Application\\Backend\\backendWebServiceMobile\\People.xml",
               "RelativeToolTip": "backendWebServiceMobile\\People.xml",
-              "ViewState": "AgIAACAAAAAAAAAAAAAwwD8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAAwDMAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
-              "WhenOpened": "2025-05-05T00:39:52.337Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-05T00:39:52.337Z"
             }
           ]
         }

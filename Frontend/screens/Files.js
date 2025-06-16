@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList, TextInput } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-// import EditStaff from './EditStaff'; // Remove if not used
+import { FontSizeContext } from '../components/FontSizeContext';
 
 const colours = {
     darkgray: '#262626',
-    red: '#ff3b3b', // Add this to avoid issues with styles.backLink
+    red: '#ff3b3b',
 };
 
 const dummyStaffList = [
@@ -35,13 +35,14 @@ const dummyStaffList = [
     { name: 'Work From Home Policy' }
 ];
 
-
 const Files = () => {
     const navigation = useNavigation();
+    const { fontSize } = useContext(FontSizeContext);
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.headerText}>Files</Text>
+                <Text style={[styles.headerText, { fontSize }]}>Files</Text>
                 <Image
                     source={require('../assets/user-profile-pic.png')}
                     style={styles.profilePic}
@@ -49,10 +50,10 @@ const Files = () => {
             </View>
 
             <View style={styles.searchBar}>
-                <Ionicons name="search-outline" size={20} color='#888' style={{ marginRight: 8 }} />
+                <Ionicons name="search-outline" size={fontSize + 4} color='#888' style={{ marginRight: 8 }} />
                 <TextInput placeholder="Search.."
                     placeholderTextColor="#888"
-                    style={styles.searchInput} />
+                    style={[styles.searchInput, { fontSize }]} />
             </View>
 
             <FlatList
@@ -62,16 +63,16 @@ const Files = () => {
                 renderItem={({ item }) => (
                     <TouchableOpacity style={styles.card}>
                         <View style={styles.cardLeft}>
-                            <Ionicons name='folder-outline' size={28} color="#262626" style={{ marginRight: 8 }} />
-                            <Text style={styles.cardText}>{item.name}</Text>
+                            <Ionicons name='folder-outline' size={fontSize + 12} color="#262626" style={{ marginRight: 8 }} />
+                            <Text style={[styles.cardText, { fontSize }]}>{item.name}</Text>
                         </View>
-                        <Ionicons name="download-outline" size={20} color="#262626" />
+                        <Ionicons name="download-outline" size={fontSize + 4} color="#262626" />
                     </TouchableOpacity>
                 )}
                 ListFooterComponent={(
                     <View style={styles.bottomButtons}>
                         <TouchableOpacity onPress={() => navigation.goBack()}>
-                            <Text style={styles.backLink}>Back</Text>
+                            <Text style={[styles.backLink, { fontSize }]}>Back</Text>
                         </TouchableOpacity>
                     </View>
                 )}
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         padding: 20,
     },
-    backLink: { // <-- Fixed name
+    backLink: {
         color: colours.red,
         fontFamily: 'Trebuchet MS',
         fontWeight: 'bold',
@@ -109,7 +110,6 @@ const styles = StyleSheet.create({
     },
     headerText: {
         color: '#FFFFFF',
-        fontSize: 16,
         fontFamily: 'Trebuchet MS',
         fontWeight: 'bold'
     },
@@ -129,7 +129,6 @@ const styles = StyleSheet.create({
     },
     searchInput: {
         flex: 1,
-        fontSize: 16,
         fontFamily: 'Trebuchet MS',
         color: '#000'
     },
@@ -150,7 +149,6 @@ const styles = StyleSheet.create({
     },
     cardText: {
         marginLeft: 10,
-        fontSize: 16,
         fontWeight: 'bold',
         color: '#262626',
         fontFamily: 'Trebuchet MS',

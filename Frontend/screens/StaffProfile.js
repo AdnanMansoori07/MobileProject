@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { FontSizeContext } from '../components/FontSizeContext';
 
 const colours = {
   darkgray: '#262626',
@@ -23,6 +24,8 @@ function generateEmail(name) {
 const StaffProfile = () => {
   const navigation = useNavigation();
   const route = useRoute();
+  const { fontSize } = useContext(FontSizeContext);
+
   const {
     id,
     name = 'N/A',
@@ -41,7 +44,7 @@ const StaffProfile = () => {
       alert("No staff ID found.");
       return;
     }
-    fetch('http://10.0.0.132:44374/WebService1.asmx/RemovePerson', {
+    fetch('http://localhost:44374/WebService1.asmx/RemovePerson', {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -60,7 +63,7 @@ const StaffProfile = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Staff Profile</Text>
+        <Text style={[styles.headerText, { fontSize }]}>Staff Profile</Text>
         <Image source={require('../assets/user-profile-pic.png')} style={styles.profilePicSmall} />
       </View>
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -68,33 +71,33 @@ const StaffProfile = () => {
           <Image source={require('../assets/user-red.png')} style={styles.profileImage} />
         </View>
 
-        <Text style={styles.name}>{name}</Text>
+        <Text style={[styles.name, { fontSize: fontSize + 2 }]}>{name}</Text>
 
         <View style={styles.buttonRow}>
           <TouchableOpacity style={styles.actionButton}>
-            <Text style={styles.actionButtonText}>Call</Text>
+            <Text style={[styles.actionButtonText, { fontSize }]}>Call</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.actionButton}>
-            <Text style={styles.actionButtonText}>Email</Text>
+            <Text style={[styles.actionButtonText, { fontSize }]}>Email</Text>
           </TouchableOpacity>
         </View>
 
         <View style={styles.infoRow}>
-          <Ionicons name="call-outline" size={20} color="#000" style={styles.infoIcon} />
-          <Text style={styles.infoText}>{phone}</Text>
+          <Ionicons name="call-outline" size={fontSize + 4} color="#000" style={styles.infoIcon} />
+          <Text style={[styles.infoText, { fontSize }]}>{phone}</Text>
         </View>
         <View style={styles.infoRow}>
-          <Ionicons name="mail-outline" size={20} color="#000" style={styles.infoIcon} />
-          <Text style={styles.infoText}>{generateEmail(name)}</Text>
+          <Ionicons name="mail-outline" size={fontSize + 4} color="#000" style={styles.infoIcon} />
+          <Text style={[styles.infoText, { fontSize }]}>{generateEmail(name)}</Text>
         </View>
         <View style={styles.infoRow}>
-          <Ionicons name="business-outline" size={20} color="#000" style={styles.infoIcon} />
-          <Text style={styles.infoText}>{department}</Text>
+          <Ionicons name="business-outline" size={fontSize + 4} color="#000" style={styles.infoIcon} />
+          <Text style={[styles.infoText, { fontSize }]}>{department}</Text>
         </View>
 
         <View style={styles.bottomButtons}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Text style={styles.backLink}>Back</Text>
+            <Text style={[styles.backLink, { fontSize }]}>Back</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('Edit Profile', {
             id,
@@ -107,10 +110,10 @@ const StaffProfile = () => {
             addressZIP,
             addressCountry
           })}>
-            <Text style={styles.backLink}>Edit</Text>
+            <Text style={[styles.backLink, { fontSize }]}>Edit</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={handleDelete}>
-            <Text style={[styles.backLink]}>Delete</Text>
+            <Text style={[styles.backLink, { fontSize }]}>Delete</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -146,7 +149,6 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: '#FFFFFF',
-    fontSize: 16,
     fontFamily: 'Trebuchet MS',
     fontWeight: 'bold',
   },
@@ -169,7 +171,6 @@ const styles = StyleSheet.create({
     borderRadius: 16
   },
   name: {
-    fontSize: 18,
     fontWeight: 'bold',
     fontFamily: 'Trebuchet MS',
     marginBottom: 20,
@@ -204,7 +205,6 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   infoText: {
-    fontSize: 16,
     color: '#000',
     fontFamily: 'Trebuchet MS',
     fontWeight: '500',

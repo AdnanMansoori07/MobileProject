@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import DepartmentDropdown from '../components/DepartmentDropdown';
+import { FontSizeContext } from '../components/FontSizeContext';
 
 const colours = {
     darkgray: "#262626"
@@ -18,51 +19,55 @@ const departments = [
 const EditStaff = () => {
     const navigation = useNavigation();
     const route = useRoute();
-    // destructure every field with fallback defaults
+    const { fontSize } = useContext(FontSizeContext);
+
     const {
         id = '',
-        name = '',
-        phone = '',
-        department = '',
-        addressStreet = '',
-        addressCity = '',
-        addressState = '',
-        addressZIP = '',
-        addressCountry = ''
+        name: initName = '',
+        phone: initPhone = '',
+        department: initDepartmentName = '',
+        addressStreet: initStreet = '',
+        addressCity: initCity = '',
+        addressState: initState = '',
+        addressZIP: initZIP = '',
+        addressCountry: initCountry = ''
     } = route.params || {};
 
-    // Always use fallback for state
-    const [nameState, setName] = useState(name || '');
-    const [phoneState, setPhone] = useState(phone || '');
-    const [departmentState, setDepartment] = useState(department || '');
-    const [addressStreetState, setAddressStreet] = useState(addressStreet || '');
-    const [addressCityState, setAddressCity] = useState(addressCity || '');
-    const [addressStateState, setAddressState] = useState(addressState || '');
-    const [addressZIPState, setAddressZIP] = useState(addressZIP || '');
-    const [addressCountryState, setAddressCountry] = useState(addressCountry || '');
+    // Find id for prefill from incoming department name
+    const initialDeptObj = departments.find(d => d.name === initDepartmentName);
+    const initialDeptId = initialDeptObj ? initialDeptObj.id : '';
 
-    const getDepartmentId = (deptName) => {
-        const found = departments.find(d => d.name === deptName);
-        return found ? found.id : '';
-    };
+    // State
+    const [name, setName] = useState(initName);
+    const [phone, setPhone] = useState(initPhone);
+    const [departmentId, setDepartmentId] = useState(initialDeptId);
+    const [addressStreet, setAddressStreet] = useState(initStreet);
+    const [addressCity, setAddressCity] = useState(initCity);
+    const [addressState, setAddressState] = useState(initState);
+    const [addressZIP, setAddressZIP] = useState(initZIP);
+    const [addressCountry, setAddressCountry] = useState(initCountry);
 
     const handleSave = () => {
         if (!id) {
             alert("No staff ID found.");
             return;
         }
+        if (!departmentId) {
+            alert("Please select a department.");
+            return;
+        }
         const params =
             `id=${encodeURIComponent(id)}&` +
-            `name=${encodeURIComponent(nameState)}&` +
-            `phone=${encodeURIComponent(phoneState)}&` +
-            `department=${getDepartmentId(departmentState)}&` +
-            `addressStreet=${encodeURIComponent(addressStreetState)}&` +
-            `addressCity=${encodeURIComponent(addressCityState)}&` +
-            `addressState=${encodeURIComponent(addressStateState)}&` +
-            `addressZIP=${encodeURIComponent(addressZIPState)}&` +
-            `addressCountry=${encodeURIComponent(addressCountryState)}`;
+            `name=${encodeURIComponent(name)}&` +
+            `phone=${encodeURIComponent(phone)}&` +
+            `department=${departmentId}&` +
+            `addressStreet=${encodeURIComponent(addressStreet)}&` +
+            `addressCity=${encodeURIComponent(addressCity)}&` +
+            `addressState=${encodeURIComponent(addressState)}&` +
+            `addressZIP=${encodeURIComponent(addressZIP)}&` +
+            `addressCountry=${encodeURIComponent(addressCountry)}`;
 
-        fetch('http://10.0.0.132:44374/WebService1.asmx/UpdatePerson', {
+        fetch('http://localhost:44374/WebService1.asmx/UpdatePerson', {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: params
@@ -80,7 +85,7 @@ const EditStaff = () => {
         <SafeAreaView style={styles.container}>
             <ScrollView>
                 <View style={styles.header}>
-                    <Text style={styles.headerText}>Edit Profile</Text>
+                    <Text style={[styles.headerText, { fontSize }]}>Edit Profile</Text>
                     <Image
                         source={require('../assets/user-profile-pic.png')}
                         style={styles.profilePic}
@@ -93,72 +98,73 @@ const EditStaff = () => {
 
                 <View style={styles.inputBox}>
                     <TextInput
-                        value={nameState}
+                        value={name}
                         onChangeText={setName}
                         placeholder="Name"
                         placeholderTextColor='#888'
-                        style={styles.input}
+                        style={[styles.input, { fontSize }]}
                     />
                 </View>
                 <View style={styles.inputBox}>
                     <TextInput
-                        value={phoneState}
+                        value={phone}
                         onChangeText={setPhone}
                         placeholder="Phone"
                         placeholderTextColor='#888'
-                        style={styles.input}
+                        style={[styles.input, { fontSize }]}
                     />
                 </View>
 
                 <DepartmentDropdown
-                    selectedDepartment={departmentState}
-                    onChange={setDepartment}
+                    value={departmentId}
+                    onChange={setDepartmentId}
                     departments={departments}
+                    fontSize={fontSize}
                 />
 
                 <View style={styles.inputBox}>
                     <TextInput
-                        value={addressStreetState}
+                        value={addressStreet}
                         onChangeText={setAddressStreet}
                         placeholder="Street"
                         placeholderTextColor='#888'
-                        style={styles.input}
+                        style={[styles.input, { fontSize }]}
                     />
                 </View>
                 <View style={styles.inputBox}>
                     <TextInput
-                        value={addressCityState}
+                        value={addressCity}
                         onChangeText={setAddressCity}
                         placeholder="City"
                         placeholderTextColor='#888'
-                        style={styles.input}
+                        style={[styles.input, { fontSize }]}
                     />
                 </View>
                 <View style={styles.inputBox}>
                     <TextInput
-                        value={addressStateState}
+                        value={addressState}
                         onChangeText={setAddressState}
                         placeholder="State"
                         placeholderTextColor='#888'
-                        style={styles.input}
+                        style={[styles.input, { fontSize }]}
                     />
                 </View>
                 <View style={styles.inputBox}>
                     <TextInput
-                        value={addressZIPState}
+                        value={addressZIP}
                         onChangeText={setAddressZIP}
                         placeholder="ZIP"
                         placeholderTextColor='#888'
-                        style={styles.input}
+                        style={[styles.input, { fontSize }]}
                     />
                 </View>
                 <View style={styles.inputBox}>
                     <TextInput
-                        value={addressCountryState}
+                        value={addressCountry}
                         onChangeText={setAddressCountry}
                         placeholder="Country"
                         placeholderTextColor='#888'
-                        style={styles.input}
+                        style={[styles.input, { fontSize }]}
                     />
                 </View>
 
@@ -166,8 +172,13 @@ const EditStaff = () => {
                     style={styles.saveButton}
                     onPress={handleSave}
                 >
-                    <Text style={styles.saveButtonText}>Save</Text>
+                    <Text style={[styles.saveButtonText, { fontSize }]}>Save</Text>
                 </TouchableOpacity>
+                <View style={[styles.bottomButtons]}>
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                        <Text style={[styles.backLink, { fontSize }]}>Back</Text>
+                    </TouchableOpacity>
+                </View>
             </ScrollView>
         </SafeAreaView>
     );
@@ -179,6 +190,19 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         padding: 20,
     },
+    backLink: {
+        color: colours.red,
+        fontFamily: 'Trebuchet MS',
+        fontWeight: 'bold',
+        marginTop: 10,
+        alignSelf: 'flex-start',
+    },
+    bottomButtons: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        width: '100%',
+        marginTop: 10
+    },
     header: {
         backgroundColor: '#262626',
         padding: 20,
@@ -189,7 +213,6 @@ const styles = StyleSheet.create({
     },
     headerText: {
         color: '#FFFFFF',
-        fontSize: 16,
         fontWeight: 'bold',
         fontFamily: 'Trebuchet MS',
     },
@@ -207,7 +230,6 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     input: {
-        fontSize: 16,
         fontFamily: 'Trebuchet MS',
         color: '#000'
     },
@@ -236,7 +258,6 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontWeight: 'bold',
         fontFamily: 'Trebuchet MS',
-        fontSize: 16,
     },
 });
 

@@ -1,18 +1,20 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { FontSizeContext } from '../components/FontSizeContext';
 
 const colours = {
     darkgray: '#262626'
 }
 
-const API_URL = 'http://10.0.0.132:44374/WebService1.asmx/GetPeople';
+const API_URL = 'http://localhost:44374/WebService1.asmx/GetPeople';
 
 const StaffDirectory = () => {
     const [staffList, setStaffList] = useState([]);
     const navigation = useNavigation();
+    const { fontSize } = useContext(FontSizeContext);
 
     useFocusEffect(
         useCallback(() => {
@@ -40,7 +42,7 @@ const StaffDirectory = () => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.headerText}>Staff Directory</Text>
+                <Text style={[styles.headerText, { fontSize }]}>Staff Directory</Text>
                 <Image
                     source={require('../assets/user-profile-pic.png')}
                     style={styles.profilePic}
@@ -48,11 +50,11 @@ const StaffDirectory = () => {
             </View>
 
             <View style={styles.searchBar}>
-                <Ionicons name="search-outline" size={20} color='#888' style={{ marginRight: 8 }} />
+                <Ionicons name="search-outline" size={fontSize + 4} color='#888' style={{ marginRight: 8 }} />
                 <TextInput
                     placeholder="Search.."
                     placeholderTextColor="#888"
-                    style={styles.searchInput}
+                    style={[styles.searchInput, { fontSize }]}
                 />
             </View>
 
@@ -60,10 +62,10 @@ const StaffDirectory = () => {
                 <View style={styles.cardLeft}>
                     <Image source={require('../assets/user-red.png')} style={styles.profileIcon} />
                     <View style={{ justifyContent: 'center', marginLeft: 10 }}>
-                        <Text style={styles.cardText}>Add Staff</Text>
+                        <Text style={[styles.cardText, { fontSize }]}>Add Staff</Text>
                     </View>
                 </View>
-                <Ionicons name="add" size={24} color="#262626" />
+                <Ionicons name="add" size={fontSize + 8} color="#262626" />
             </TouchableOpacity>
 
             <View style={styles.divider} />
@@ -89,9 +91,9 @@ const StaffDirectory = () => {
                     >
                         <View style={styles.cardLeft}>
                             <Image source={require('../assets/user-red.png')} style={styles.profileIcon} />
-                            <Text style={styles.cardText}>{item.name}</Text>
+                            <Text style={[styles.cardText, { fontSize }]}>{item.name}</Text>
                         </View>
-                        <Ionicons name="ellipsis-vertical" size={20} color="#262626" />
+                        <Ionicons name="ellipsis-vertical" size={fontSize + 4} color="#262626" />
                     </TouchableOpacity>
                 )}
             />
@@ -115,7 +117,6 @@ const styles = StyleSheet.create({
     },
     headerText: {
         color: '#FFFFFF',
-        fontSize: 16,
         fontFamily: 'Trebuchet MS',
         fontWeight: 'bold'
     },
@@ -135,7 +136,6 @@ const styles = StyleSheet.create({
     },
     searchInput: {
         flex: 1,
-        fontSize: 16,
         fontFamily: 'Trebuchet MS',
         color: '#000'
     },
@@ -156,7 +156,6 @@ const styles = StyleSheet.create({
     },
     cardText: {
         marginLeft: 10,
-        fontSize: 16,
         fontWeight: 'bold',
         color: '#262626',
         fontFamily: 'Trebuchet MS',

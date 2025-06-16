@@ -59,8 +59,7 @@
               "RelativeToolTip": "backendWebServiceMobile\\Department.xml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
-              "WhenOpened": "2025-05-05T00:46:30.97Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-05T00:46:30.97Z"
             },
             {
               "$type": "Document",
@@ -70,7 +69,7 @@
               "RelativeDocumentMoniker": "backendWebServiceMobile\\WebService1.asmx.cs",
               "ToolTip": "C:\\Users\\adnan\\Desktop\\Mobile Application\\Backend\\backendWebServiceMobile\\WebService1.asmx.cs",
               "RelativeToolTip": "backendWebServiceMobile\\WebService1.asmx.cs",
-              "ViewState": "AgIAADcAAAAAAAAAAAAgwEsAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAIwFAAAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-05T00:42:42.844Z",
               "EditorCaption": ""
@@ -85,8 +84,7 @@
               "RelativeToolTip": "backendWebServiceMobile\\Department.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T00:38:05.047Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-05T00:38:05.047Z"
             },
             {
               "$type": "Document",
@@ -98,8 +96,7 @@
               "RelativeToolTip": "backendWebServiceMobile\\People.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T00:37:39.541Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-05T00:37:39.541Z"
             },
             {
               "$type": "Document",
@@ -109,10 +106,9 @@
               "RelativeDocumentMoniker": "backendWebServiceMobile\\People.xml",
               "ToolTip": "C:\\Users\\adnan\\Desktop\\Mobile Application\\Backend\\backendWebServiceMobile\\People.xml",
               "RelativeToolTip": "backendWebServiceMobile\\People.xml",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAADIAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAAwDMAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
-              "WhenOpened": "2025-05-05T00:39:52.337Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-05T00:39:52.337Z"
             }
           ]
         }

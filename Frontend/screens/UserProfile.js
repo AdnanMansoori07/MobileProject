@@ -1,15 +1,16 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native';
+import React, { useContext } from 'react';
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import { FontSizeContext } from '../components/FontSizeContext';
 
 const colours = {
     darkgray: "#262626"
 }
 
 const UserProfile = () => {
-
     const navigation = useNavigation();
+    const { fontSize } = useContext(FontSizeContext);
 
     const [name, setName] = React.useState('Sabrina Carpenter');
     const [phone, setPhone] = React.useState('02 2000 2000');
@@ -20,11 +21,10 @@ const UserProfile = () => {
     const [country, setCountry] = React.useState('Australia');
     const [department, setDepartment] = React.useState('Marketing');
 
-
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.headerText}>
+                <Text style={[styles.headerText, { fontSize }]}>
                     My Profile
                 </Text>
                 <Image
@@ -43,7 +43,7 @@ const UserProfile = () => {
                     onChangeText={setName}
                     placeholder={name}
                     placeholderTextColor='#888'
-                    style={styles.input}
+                    style={[styles.input, { fontSize }]}
                 />
             </View>
             <View style={styles.inputBox}>
@@ -52,7 +52,7 @@ const UserProfile = () => {
                     onChangeText={setPhone}
                     placeholder={phone}
                     placeholderTextColor='#888'
-                    style={styles.input}
+                    style={[styles.input, { fontSize }]}
                 />
             </View>
             <View style={styles.inputBox}>
@@ -61,7 +61,7 @@ const UserProfile = () => {
                     onChangeText={setEmail}
                     placeholder={email}
                     placeholderTextColor='#888'
-                    style={styles.input}
+                    style={[styles.input, { fontSize }]}
                 />
             </View>
             <View style={styles.inputBox}>
@@ -70,7 +70,7 @@ const UserProfile = () => {
                     onChangeText={setAddress}
                     placeholder={address}
                     placeholderTextColor='#888'
-                    style={styles.input}
+                    style={[styles.input, { fontSize }]}
                 />
             </View>
             <View style={styles.inputBox}>
@@ -79,7 +79,7 @@ const UserProfile = () => {
                     onChangeText={setPostcode}
                     placeholder={postcode}
                     placeholderTextColor='#888'
-                    style={styles.input}
+                    style={[styles.input, { fontSize }]}
                 />
             </View>
             <View style={styles.inputBox}>
@@ -88,7 +88,7 @@ const UserProfile = () => {
                     onChangeText={setCity}
                     placeholder={city}
                     placeholderTextColor='#888'
-                    style={styles.input}
+                    style={[styles.input, { fontSize }]}
                 />
             </View>
             <View style={styles.inputBox}>
@@ -97,7 +97,7 @@ const UserProfile = () => {
                     onChangeText={setCountry}
                     placeholder={country}
                     placeholderTextColor='#888'
-                    style={styles.input}
+                    style={[styles.input, { fontSize }]}
                 />
             </View>
 
@@ -107,14 +107,14 @@ const UserProfile = () => {
                     onChangeText={setDepartment}
                     placeholder={department}
                     placeholderTextColor='#888'
-                    style={styles.input}
+                    style={[styles.input, { fontSize }]}
                 />
             </View>
             <TouchableOpacity
                 style={styles.saveButton}
                 onPress={() => navigation.goBack()}
             >
-                <Text style={styles.saveButtonText}>Save</Text>
+                <Text style={[styles.saveButtonText, { fontSize }]}>Save</Text>
             </TouchableOpacity>
         </SafeAreaView>
     )
@@ -136,7 +136,6 @@ const styles = StyleSheet.create({
     },
     headerText: {
         color: '#FFFFFF',
-        fontSize: 16,
         fontFamily: 'Trebuchet MS',
         fontWeight: 'bold'
     },
@@ -153,7 +152,6 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     input: {
-        fontSize: 16,
         fontFamily: 'Trebuchet MS',
         color: '#000'
     },
@@ -181,8 +179,7 @@ const styles = StyleSheet.create({
     saveButtonText: {
         color: '#FFFFFF',
         fontFamily: 'Trebuchet MS',
-        fontWeight: 'bold',
-        fontSize: 16,
+        fontWeight: 'bold'
     },
 });
 

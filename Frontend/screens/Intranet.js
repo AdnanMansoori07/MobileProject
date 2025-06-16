@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   View,
   Text,
@@ -11,6 +11,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import { FontSizeContext } from '../components/FontSizeContext';
 
 const colours = {
   darkgray: '#262626',
@@ -19,11 +20,12 @@ const colours = {
 
 const Intranet = () => {
   const navigation = useNavigation();
+  const { fontSize } = useContext(FontSizeContext);
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Intranet</Text>
+        <Text style={[styles.headerText, { fontSize }]}>Intranet</Text>
         <Image
           source={require('../assets/user-profile-pic.png')}
           style={styles.profilePic}
@@ -31,33 +33,33 @@ const Intranet = () => {
       </View>
 
       <View style={styles.searchBar}>
-        <Ionicons name="search-outline" size={20} color="#888" style={{ marginRight: 8 }} />
+        <Ionicons name="search-outline" size={fontSize + 4} color="#888" style={{ marginRight: 8 }} />
         <TextInput
           placeholder="Search.."
           placeholderTextColor="#888"
-          style={styles.searchInput}
+          style={[styles.searchInput, { fontSize }]}
         />
       </View>
 
       <View style={styles.buttonGrid}>
         <View style={styles.buttonRow}>
           <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Files')}>
-            <Ionicons name="folder-outline" size={28} color={colours.darkgray}/>
-            <Text style={styles.buttonText}>Files</Text>
+            <Ionicons name="folder-outline" size={fontSize + 12} color={colours.darkgray}/>
+            <Text style={[styles.buttonText, { fontSize }]}>Files</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Reports')}>
-            <Ionicons name="clipboard-outline" size={28} color={colours.darkgray} />
-            <Text style={styles.buttonText}>Reports</Text>
+            <Ionicons name="clipboard-outline" size={fontSize + 12} color={colours.darkgray} />
+            <Text style={[styles.buttonText, { fontSize }]}>Reports</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.buttonRow}>
           <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Training')}>
-            <Ionicons name="library-outline" size={28} color={colours.darkgray} />
-            <Text style={styles.buttonText}>Training</Text>
+            <Ionicons name="library-outline" size={fontSize + 12} color={colours.darkgray} />
+            <Text style={[styles.buttonText, { fontSize }]}>Training</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Requests')}>
-            <Ionicons name="calendar-outline" size={28} color={colours.darkgray} />
-            <Text style={styles.buttonText}>Requests</Text>
+            <Ionicons name="calendar-outline" size={fontSize + 12} color={colours.darkgray} />
+            <Text style={[styles.buttonText, { fontSize }]}>Requests</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -81,7 +83,6 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: '#FFFFFF',
-    fontSize: 16,
     fontWeight: 'bold',
     fontFamily: 'Trebuchet MS',
   },
@@ -101,7 +102,6 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     flex: 1,
-    fontSize: 16,
     fontFamily: 'Trebuchet MS',
     color: '#000',
   },
